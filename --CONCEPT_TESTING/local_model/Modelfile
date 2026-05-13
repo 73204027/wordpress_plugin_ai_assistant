@@ -1,0 +1,26 @@
+- gemini flash lite: come pocos tokens
+- un modelo chino
+
+- gemini 3 EQUIVALENTE A gemma 4: buena pc, modelo grande
+
+
+
+
+para evitar alucinaciones:
+y para eso tendrias que ver como meterle caverman por eje (skills)
+un modelo bueno seria llama3.1:8b
+tendrias que enseñarle a usar tools
+para que sepa usar el entorno del e-commerce
+
+system prompt:
+
+
+role user es el que el usuario usara
+
+es necesario hacer fine tuning con datos del negocio???
+
+
+
+
+MCP para que haga consultas a la bd
+
