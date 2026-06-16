@@ -1,3 +1,20 @@
+## CONCEPTUALIZING
+(human development)
+
+PROTOTYPES FOR AI AGENT:
+- Third Party Service
+	- 
+- Custom made
+	- OpenAI API
+	- Local Model
+		- MCP + SKILLS + Ollama
+		- SKILLS + CLI + Ollama
+		- hosted n8n + Ollama
+
+
+
+
+## RESULT 1
 Below is the version I would actually ship first: a single WordPress plugin directory that keeps the chat UI, REST endpoint, Ollama bridge, topic guardrails, and catalog lookup logic together. Ollama supports tool calling through /api/chat, and Modelfile is the place to define FROM, PARAMETER, and SYSTEM; WordPress custom REST routes should be registered on rest_api_init, include permission_callback, and front-end scripts should be loaded with wp_enqueue_script. For browser-to-WordPress REST calls inside WordPress, the standard nonce pattern is wp_create_nonce('wp_rest') plus the X-WP-Nonce header.
 
 I am assuming your product data will be exposed by a REST catalog API. If you later move that adapter into Laravel, Laravel’s HTTP client is the official outgoing-request wrapper on that side.
@@ -29,6 +46,8 @@ your catalog API base URL,
 your API token if your catalog is protected.
 Implement the catalog endpoints in Laravel or your current backend so they return products, prices, discounts, and URLs in the shape expected by the plugin.
 Test these cases:
+
+
 product search,
 comparison,
 discount lookup,
@@ -36,7 +55,8 @@ off-topic redirect,
 sensitive-topic refusal.
 Only after this works, consider extra tools like add-to-cart, quote generation, or support ticket creation. Keep those allowlisted and explicit; do not expose shell, SQL, or filesystem execution.
 3) Plugin code
-aia-assistant.php
+##### aia-assistant.php
+```php
 <?php
 /**
  * Plugin Name: AIA Assistant
@@ -687,7 +707,12 @@ final class AIA_Ollama_Client {
 
 register_activation_hook(__FILE__, ['AIA_Assistant_Plugin', 'activate']);
 AIA_Assistant_Plugin::instance();
-assets/chat.js
+
+```
+
+
+##### assets/chat.js
+```javascript
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.querySelector("[data-aia-chat]");
   if (!root || typeof AIA_CHAT === "undefined") return;
@@ -819,7 +844,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-assets/chat.css
+```
+
+##### assets/chat.css
+```css
 .aia-shell {
   position: fixed;
   right: 20px;
@@ -964,6 +992,10 @@ assets/chat.css
   color: #fff;
   cursor: pointer;
 }
+```
+
+
+
 4) Ollama Modelfile
 
 Ollama’s documentation says to save it as Modelfile, use FROM for the base model, and use PARAMETER / SYSTEM to set behavior.
@@ -1028,3 +1060,6 @@ tool calling,
 catalog/API grounding,
 logged failure cases,
 only then fine-tuning if you still need style or domain consistency improvements.
+
+
+## HEADING 3
