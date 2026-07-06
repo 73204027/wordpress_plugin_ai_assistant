@@ -1,0 +1,79 @@
+{
+  "page": "header",
+  "forms": [
+    {
+      "action": "https://compuciber.com/",
+      "method": "get"
+    }
+  ],
+  "hidden_inputs": [
+    "post_type"
+  ],
+  "json_ld": {},
+  "html_ids": [
+    "menu-categorias",
+    "menu-menu_secundario",
+    "wd-6a4990d9771ad",
+    "wd-6a4990d977430"
+  ],
+  "html_classes": [
+    "wd-header-cats",
+    "wd-header-nav",
+    "wd-header-main-nav",
+    "woodmart-ajax-search",
+    "searchform",
+    "wd-search-form",
+    "wd-header-search-form-mobile",
+    "wd-search-results-wrapper",
+    "wd-search-results",
+    "wd-dropdown-results",
+    "wd-dropdown",
+    "wd-dropdown-menu",
+    "wd-scroll",
+    "wd-scroll-content",
+    "wd-nav",
+    "wd-nav-header",
+    "wd-nav-main",
+    "wd-nav-vertical",
+    "wd-sub-menu",
+    "woodmart-nav-link",
+    "menu-item",
+    "menu-item-type-taxonomy",
+    "menu-item-type-custom",
+    "menu-item-object-product_cat",
+    "menu-item-object-custom",
+    "menu-item-has-children",
+    "menu-mega-dropdown",
+    "menu-simple-dropdown",
+    "dropdown-with-height",
+    "wd-event-hover",
+    "elementor",
+    "elementor-section",
+    "elementor-column",
+    "elementor-widget",
+    "elementor-widget-heading",
+    "elementor-widget-wd_list",
+    "wd-list",
+    "wd-button-wrapper",
+    "wd-clear-search",
+    "wd-role-btn"
+  ],
+  "data_attributes": [
+    "data-optimized",
+    "data-thumbnail",
+    "data-price",
+    "data-post_type",
+    "data-count",
+    "data-sku",
+    "data-symbols_count",
+    "data-include_cat_search",
+    "data-elementor-type",
+    "data-elementor-id",
+    "data-elementor-post-type",
+    "data-id",
+    "data-element_type",
+    "data-e-type",
+    "data-widget_type"
+  ],
+  "embedded_js": []
+}

@@ -1,0 +1,1669 @@
+{
+    "request": "I need to reverse engineer the database of compuciber.com, so I can understand the tables and fields, in order to develop a plugin that interacts with that database. I don't have access to the WordPress backend or source code. Infer the logical database schema, relationships, taxonomies, custom post types, metadata, plugin tables, and business logic as accurately as possible from the following evidence.",
+    "evidence": {
+        "about": "Peruvian technology retailer (COMPUCIBER S.A.C.) focused on computers, laptops, computer components, networking equipment, printers, POS equipment and technical support services. Sells both retail and wholesale. Offers secure online purchases and technical support.",
+        "wordpress": {
+          "version": "7.0",
+          "wp_json": {
+            "core_namespace": "wp/v2",
+            "types_endpoint": "/wp-json/wp/v2/types",
+            "store_namespace": "wc/store/v1",
+            "products_endpoint": "/wp-json/wc/store/v1/products",
+            "rest_endpoints": [
+              "/wp-json/wp/v2",
+              "/wp-json/wc/store/v1",
+              "/wp-json/wc/v3",
+              "/wp-json/contact-form-7/v1",
+              "/wp-json/elementor/v1",
+              "/wp-json/elementor-pro/v1",
+              "/wp-json/litespeed/v1",
+              "/wp-json/yoast/v1",
+              "/wp-json/google-site-kit/v1",
+              "/wp-json/wd/v1",
+              "/wp-json/wc/pos/v1/catalog"
+            ],
+            "ajax_endpoints": [
+              "/wp-admin/admin-ajax.php",
+              "/?wc-ajax=*"
+            ]
+          },
+          "rest_routes": [
+            {
+              "post_type": "post",
+              "rest_base": "posts",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "category",
+                "post_tag"
+              ],
+              "hierarchical": false,
+              "has_archive": false
+            },
+            {
+              "post_type": "page",
+              "rest_base": "pages",
+              "namespace": "wp/v2",
+              "taxonomies": [],
+              "hierarchical": true,
+              "has_archive": false
+            },
+            {
+              "post_type": "attachment",
+              "rest_base": "media",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "nav_menu_item",
+              "rest_base": "menu-items",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "nav_menu"
+              ]
+            },
+            {
+              "post_type": "wp_block",
+              "rest_base": "blocks",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "wp_pattern_category"
+              ]
+            },
+            {
+              "post_type": "wp_template",
+              "rest_base": "templates",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "wp_template_part",
+              "rest_base": "template-parts",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "wp_global_styles",
+              "rest_base": "global-styles",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "wp_navigation",
+              "rest_base": "navigation",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "wp_font_family",
+              "rest_base": "font-families",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "wp_font_face",
+              "rest_base": "font-families/(?P<font_family_id>[\\d]+)/font-faces",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "product",
+              "rest_base": "product",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "product_brand",
+                "product_cat",
+                "product_tag",
+                "pa_marca",
+                "pa_procesador",
+                "pa_color"
+              ],
+              "has_archive": "tienda"
+            },
+            {
+              "post_type": "product",
+              "rest_base": "products",
+              "namespace": "wc/store/v1"
+            },
+            {
+              "post_type": "portfolio",
+              "rest_base": "portfolio",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "project-cat"
+              ],
+              "has_archive": true
+            },
+            {
+              "post_type": "elementor_library",
+              "rest_base": "elementor_library",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "elementor_snippet",
+              "rest_base": "elementor_snippet",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "e-floating-buttons",
+              "rest_base": "e-floating-buttons",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "woodmart_layout",
+              "rest_base": "woodmart_layout",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "woodmart_woo_lv",
+              "rest_base": "woodmart_woo_lv",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "woodmart_woo_fbt",
+              "rest_base": "woodmart_woo_fbt",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "cms_block",
+              "rest_base": "cms_block",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "cms_block_cat"
+              ]
+            },
+            {
+              "post_type": "wd_popup",
+              "rest_base": "wd_popup",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "wd_popup_cat"
+              ]
+            },
+            {
+              "post_type": "wd_floating_block",
+              "rest_base": "wd_floating_block",
+              "namespace": "wp/v2",
+              "taxonomies": [
+                "wd_floating_block_cat"
+              ]
+            },
+            {
+              "post_type": "jp_act_log_event",
+              "rest_base": "activity-log-events",
+              "namespace": "wp/v2"
+            },
+            {
+              "post_type": "whatsapp-accounts",
+              "rest_base": "whatsapp-accounts",
+              "namespace": "wp/v2",
+              "has_archive": true
+            }
+          ],
+          "detected_plugins": [
+            {
+              "name": "WooCommerce",
+              "evidence": [
+                "product post type",
+                "product_cat",
+                "product_tag",
+                "product_brand",
+                "wc/store/v1 namespace",
+                "prices, sku, stock_availability, weight, dimensions fields",
+                "pa_ attributes prefix",
+                "add_to_cart endpoint references"
+              ]
+            },
+            {
+              "name": "Elementor",
+              "evidence": [
+                "elementor_library",
+                "elementor_snippet",
+                "e-floating-buttons"
+              ]
+            },
+            {
+              "name": "Woodmart Theme/Core",
+              "evidence": [
+                "woodmart_layout",
+                "woodmart_woo_lv",
+                "woodmart_woo_fbt",
+                "wd_popup",
+                "wd_floating_block",
+                "cms_block"
+              ]
+            },
+            {
+              "name": "Yoast SEO Premium",
+              "evidence": [
+                "Yoast metadata present"
+              ]
+            },
+            {
+              "name": "Jetpack Activity Log",
+              "confidence": "medium",
+              "evidence": [
+                "jp_act_log_event"
+              ]
+            },
+            {
+              "name": "WhatsApp integration plugin",
+              "evidence": [
+                "whatsapp-accounts CPT"
+              ]
+            },
+            {
+              "name": "GTM4WP"
+            },
+            {
+              "name": "LiteSpeed Cache"
+            }
+          ],
+          "theme": "Woodmart 8.5.4",
+          "page_builder": "Elementor",
+          "headers": {
+            "x-powered-by": "PHP/8.3.30",
+            "x-dns-prefetch-control": "on",
+            "content-type": "text/html; charset=UTF-8",
+            "link": "<https://compuciber.com/>; rel=shortlink",
+            "x-litespeed-cache-control": "public,max-age=604800",
+            "x-litespeed-tag": "fc9_front,fc9_URL.6666cd76f96956469e7be39d750cc7d9,fc9_F,fc9_Po.16638,fc9_PGS,fc9_guest,fc9_",
+            "date": "Sat, 04 Jul 2026 22:40:53 GMT",
+            "server": "LiteSpeed",
+            "platform": "hostinger",
+            "panel": "hpanel",
+            "content-security-policy": "upgrade-insecure-requests"
+          },
+          "taxonomies": [
+            {
+              "taxonomy": "category",
+              "rest_base": "categories",
+              "namespace": "wp/v2",
+              "object_types": [
+                "post"
+              ],
+              "hierarchical": true
+            },
+            {
+              "taxonomy": "post_tag",
+              "rest_base": "tags",
+              "namespace": "wp/v2",
+              "object_types": [
+                "post"
+              ],
+              "hierarchical": false
+            },
+            {
+              "taxonomy": "nav_menu",
+              "rest_base": "menus",
+              "namespace": "wp/v2",
+              "object_types": [
+                "nav_menu_item"
+              ],
+              "hierarchical": false
+            },
+            {
+              "taxonomy": "wp_pattern_category",
+              "rest_base": "wp_pattern_category",
+              "namespace": "wp/v2",
+              "object_types": [
+                "wp_block"
+              ],
+              "hierarchical": false
+            },
+            {
+              "taxonomy": "cms_block_cat",
+              "rest_base": "cms_block_cat",
+              "namespace": "wp/v2",
+              "object_types": [
+                "cms_block"
+              ],
+              "hierarchical": true,
+              "plugin": "Woodmart"
+            },
+            {
+              "taxonomy": "wd_popup_cat",
+              "rest_base": "wd_popup_cat",
+              "namespace": "wp/v2",
+              "object_types": [
+                "wd_popup"
+              ],
+              "hierarchical": true,
+              "plugin": "Woodmart"
+            },
+            {
+              "taxonomy": "wd_floating_block_cat",
+              "rest_base": "wd_floating_block_cat",
+              "namespace": "wp/v2",
+              "object_types": [
+                "wd_floating_block"
+              ],
+              "hierarchical": true,
+              "plugin": "Woodmart"
+            },
+            {
+              "taxonomy": "project-cat",
+              "rest_base": "project-cat",
+              "namespace": "wp/v2",
+              "object_types": [
+                "portfolio"
+              ],
+              "hierarchical": true,
+              "plugin": "Woodmart"
+            },
+            {
+              "taxonomy": "product_brand",
+              "rest_base": "product_brand",
+              "namespace": "wp/v2",
+              "object_types": [
+                "product"
+              ],
+              "hierarchical": true,
+              "plugin": "WooCommerce (brand extension or theme feature)"
+            },
+            {
+              "taxonomy": "product_cat",
+              "rest_base": "product_cat",
+              "namespace": "wp/v2",
+              "object_types": [
+                "product"
+              ],
+              "hierarchical": true,
+              "plugin": "WooCommerce"
+            },
+            {
+              "taxonomy": "product_tag",
+              "rest_base": "product_tag",
+              "namespace": "wp/v2",
+              "object_types": [
+                "product"
+              ],
+              "hierarchical": false,
+              "plugin": "WooCommerce"
+            },
+            {
+              "taxonomy": "pa_marca",
+              "rest_base": "pa_marca",
+              "namespace": "wc/store/v1",
+              "object_types": [
+                "product"
+              ],
+              "hierarchical": false,
+              "plugin": "WooCommerce"
+            },
+            {
+              "taxonomy": "pa_procesador",
+              "rest_base": "pa_procesador",
+              "namespace": "wc/store/v1",
+              "object_types": [
+                "product"
+              ],
+              "hierarchical": false,
+              "plugin": "WooCommerce"
+            },
+            {
+              "taxonomy": "pa_color",
+              "rest_base": "pa_color",
+              "namespace": "wc/store/v1",
+              "object_types": [
+                "product"
+              ],
+              "hierarchical": false,
+              "plugin": "WooCommerce"
+            }
+          ],
+          "taxonomy_relationships": [
+            {
+              "post_type": "post",
+              "taxonomies": [
+                "category",
+                "post_tag"
+              ]
+            },
+            {
+              "post_type": "product",
+              "taxonomies": [
+                "product_brand",
+                "product_cat",
+                "product_tag",
+                "pa_marca",
+                "pa_procesador",
+                "pa_color"
+              ]
+            },
+            {
+              "post_type": "portfolio",
+              "taxonomies": [
+                "project-cat"
+              ]
+            },
+            {
+              "post_type": "cms_block",
+              "taxonomies": [
+                "cms_block_cat"
+              ]
+            },
+            {
+              "post_type": "wd_popup",
+              "taxonomies": [
+                "wd_popup_cat"
+              ]
+            },
+            {
+              "post_type": "wd_floating_block",
+              "taxonomies": [
+                "wd_floating_block_cat"
+              ]
+            },
+            {
+              "post_type": "nav_menu_item",
+              "taxonomies": [
+                "nav_menu"
+              ]
+            },
+            {
+              "post_type": "wp_block",
+              "taxonomies": [
+                "wp_pattern_category"
+              ]
+            }
+          ]
+        },
+        "woocommerce": {
+          "version": "10.9.1",
+          "product_examples": [
+            {
+              "id": 45779,
+              "parent": 0,
+              "type": "simple",
+              "sku": "40360",
+              "on_sale": false,
+              "prices": {
+                "currency_code": "PEN",
+                "price": "5000",
+                "regular_price": "5000",
+                "sale_price": "5000"
+              },
+              "average_rating": "0",
+              "review_count": 0,
+              "has_options": false,
+              "is_purchasable": true,
+              "is_in_stock": true,
+              "is_on_backorder": false,
+              "low_stock_remaining": 1,
+              "weight": "0.65",
+              "dimensions": {
+                "length": "7",
+                "width": "10",
+                "height": "4"
+              }
+            }
+          ],
+          "category_examples": [
+            {
+              "id": 106,
+              "slug": "adaptador-de-video"
+            },
+            {
+              "id": 74,
+              "slug": "adaptadores"
+            }
+          ],
+          "attribute_examples": [
+            {
+              "id": 8,
+              "taxonomy": "pa_marca",
+              "has_variations": false,
+              "terms": [
+                {
+                  "id": 694,
+                  "slug": "amd"
+                },
+                {
+                  "id": 647,
+                  "slug": "tp-link"
+                },
+                {
+                  "id": 828,
+                  "slug": "iblue"
+                },
+                {
+                  "id": 532,
+                  "slug": "hp"
+                },
+                {
+                  "id": 608,
+                  "slug": "canon"
+                },
+                {
+                  "id": 680,
+                  "slug": "halion"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "taxonomy": "pa_procesador",
+              "has_variations": false,
+              "terms": [
+                {
+                  "id": 574,
+                  "slug": "amd-ryzen-5"
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "taxonomy": "pa_color",
+              "has_variations": false,
+              "terms": [
+                {
+                  "id": 657,
+                  "slug": "blanco"
+                },
+                {
+                  "id": 749,
+                  "slug": "gris"
+                },
+                {
+                  "id": 819,
+                  "slug": "plateado"
+                },
+                {
+                  "id": 655,
+                  "slug": "negro"
+                },
+                {
+                  "id": 658,
+                  "slug": "rojo"
+                },
+                {
+                  "id": 827,
+                  "slug": "azul-claro"
+                },
+                {
+                  "id": 712,
+                  "slug": "azul"
+                }
+              ]
+            }
+          ],
+          "variation_examples": [],
+          "cart_payloads": [],
+          "checkout_payloads": []
+        },
+        "network": {
+          "ajax_calls": [
+            "/wp-admin/admin-ajax.php",
+            "/?wc-ajax=*"
+          ],
+          "rest_calls": [
+            "/wp-json/wp/v2/types",
+            "/wp-json/wp/v2/posts",
+            "/wp-json/wp/v2/pages",
+            "/wp-json/wp/v2/media",
+            "/wp-json/wp/v2/menu-items",
+            "/wp-json/wp/v2/blocks",
+            "/wp-json/wp/v2/templates",
+            "/wp-json/wp/v2/template-parts",
+            "/wp-json/wp/v2/global-styles",
+            "/wp-json/wp/v2/navigation",
+            "/wp-json/wp/v2/font-families",
+            "/wp-json/wp/v2/product",
+            "/wp-json/wp/v2/portfolio",
+            "/wp-json/wp/v2/elementor_library",
+            "/wp-json/wp/v2/cms_block",
+            "/wp-json/wp/v2/wd_popup",
+            "/wp-json/wp/v2/wd_floating_block",
+            "/wp-json/wp/v2/woodmart_layout",
+            "/wp-json/wp/v2/woodmart_woo_lv",
+            "/wp-json/wp/v2/woodmart_woo_fbt",
+            "/wp-json/wp/v2/activity-log-events",
+            "/wp-json/wp/v2/whatsapp-accounts",
+            "/wp-json/wp/v2/taxonomies",
+            "/wp-json/wp/v2/categories",
+            "/wp-json/wp/v2/tags",
+            "/wp-json/wp/v2/menus",
+            "/wp-json/wp/v2/wp_pattern_category",
+            "/wp-json/wp/v2/cms_block_cat",
+            "/wp-json/wp/v2/wd_popup_cat",
+            "/wp-json/wp/v2/wd_floating_block_cat",
+            "/wp-json/wp/v2/project-cat",
+            "/wp-json/wp/v2/product_brand",
+            "/wp-json/wp/v2/product_cat",
+            "/wp-json/wp/v2/product_tag",
+            "/wp-json/wc/store/v1/products",
+            "/wp-json/wc/store/v1/products?add-to-cart=45779",
+            "/wp-json/wc/store/v1/products?related=45779&per_page=10"
+          ],
+          "json_responses": [
+            "wp/v2/types",
+            "wp/v2/taxonomies",
+            "wc/store/v1/products"
+          ]
+        },
+        "reverse_engineering": {
+          "pages": [
+            {
+              "page": "cart",
+              "forms": [
+                {
+                  "action": "https://compuciber.com/carrito/",
+                  "method": "post"
+                }
+              ],
+              "hidden_inputs": [
+                "woocommerce-cart-nonce",
+                "_wp_http_referer"
+              ],
+              "json_ld": {},
+              "html_ids": [
+                "main-content",
+                "post-9",
+                "woocommerce-cart-nonce"
+              ],
+              "html_classes": [
+                "woocommerce",
+                "woocommerce-cart-form",
+                "woocommerce-cart-form__contents",
+                "woocommerce-cart-form__cart-item",
+                "cart_item",
+                "cart-content-wrapper",
+                "woocommerce-notices-wrapper",
+                "shop_table",
+                "shop_table_responsive",
+                "cart",
+                "wd-cart-action-row",
+                "cart-actions",
+                "cart_totals",
+                "cart-totals-inner",
+                "wc-proceed-to-checkout",
+                "checkout-button",
+                "wc-forward",
+                "remove",
+                "quantity",
+                "qty",
+                "input-text",
+                "post-9",
+                "page",
+                "type-page",
+                "status-publish"
+              ],
+              "data_attributes": [
+                "data-gtm4wp_product_data",
+                "data-product_id",
+                "data-product_sku",
+                "data-title"
+              ],
+              "embedded_js": []
+            },
+            {
+              "page": "product_archive",
+              "forms": [
+                {
+                  "action": "",
+                  "method": "get"
+                }
+              ],
+              "hidden_inputs": [
+                "paged"
+              ],
+              "json_ld": {},
+              "html_ids": [
+                "main-content"
+              ],
+              "html_classes": [
+                "woocommerce-ordering",
+                "orderby",
+                "products",
+                "wd-products",
+                "wd-products-element",
+                "wd-product",
+                "product",
+                "type-product",
+                "product-grid-item",
+                "product-wrapper",
+                "product-type-composite",
+                "product_type_composite",
+                "add_to_cart_button",
+                "add-to-cart-loop",
+                "gtm4wp_productdata",
+                "instock",
+                "purchasable",
+                "taxable",
+                "shipping-taxable",
+                "post-43364",
+                "post-43605",
+                "post-43611",
+                "post-43620",
+                "product_cat-computadoras-completas",
+                "product_cat-computadoras-para-estudiantes-oficinas"
+              ],
+              "data_attributes": [
+                "data-optimized",
+                "data-is-sorted-by",
+                "data-source",
+                "data-min_price",
+                "data-max_price",
+                "data-columns",
+                "data-loop",
+                "data-id",
+                "data-quantity",
+                "data-product_id",
+                "data-product_sku",
+                "data-gtm4wp_product_data"
+              ],
+              "embedded_js": [
+                "gtm4wp_product_data"
+              ],
+              "taxonomy_examples": {
+                "attributes": [
+                  "pa_marca",
+                  "pa_conectividad",
+                  "pa_color",
+                  "pa_procesador",
+                  "pa_memoria-ram",
+                  "pa_almacenamiento",
+                  "pa_tarjeta-grafica",
+                  "pa_tamano-pantalla",
+                  "pa_tipo-pantalla",
+                  "pa_resolucion",
+                  "pa_frecuencia-de-refresco",
+                  "pa_tiempo-de-respuesta",
+                  "pa_tipo-cable",
+                  "pa_longitud-cable",
+                  "pa_tipo-adaptador-video"
+                ],
+                "product_cat": [
+                  "computadoras-completas",
+                  "computadoras-para-estudiantes-oficinas"
+                ]
+              }
+            },
+            {
+              "page": "header",
+              "forms": [
+                {
+                  "action": "https://compuciber.com/",
+                  "method": "get"
+                }
+              ],
+              "hidden_inputs": [
+                "post_type"
+              ],
+              "json_ld": {},
+              "html_ids": [
+                "menu-categorias",
+                "menu-menu_secundario",
+                "wd-6a4990d9771ad",
+                "wd-6a4990d977430"
+              ],
+              "html_classes": [
+                "wd-header-cats",
+                "wd-header-nav",
+                "wd-header-main-nav",
+                "woodmart-ajax-search",
+                "searchform",
+                "wd-search-form",
+                "wd-header-search-form-mobile",
+                "wd-search-results-wrapper",
+                "wd-search-results",
+                "wd-dropdown-results",
+                "wd-dropdown",
+                "wd-dropdown-menu",
+                "wd-scroll",
+                "wd-scroll-content",
+                "wd-nav",
+                "wd-nav-header",
+                "wd-nav-main",
+                "wd-nav-vertical",
+                "wd-sub-menu",
+                "woodmart-nav-link",
+                "menu-item",
+                "menu-item-type-taxonomy",
+                "menu-item-type-custom",
+                "menu-item-object-product_cat",
+                "menu-item-object-custom",
+                "menu-item-has-children",
+                "menu-mega-dropdown",
+                "menu-simple-dropdown",
+                "dropdown-with-height",
+                "wd-event-hover",
+                "elementor",
+                "elementor-section",
+                "elementor-column",
+                "elementor-widget",
+                "elementor-widget-heading",
+                "elementor-widget-wd_list",
+                "wd-list",
+                "wd-button-wrapper",
+                "wd-clear-search",
+                "wd-role-btn"
+              ],
+              "data_attributes": [
+                "data-optimized",
+                "data-thumbnail",
+                "data-price",
+                "data-post_type",
+                "data-count",
+                "data-sku",
+                "data-symbols_count",
+                "data-include_cat_search",
+                "data-elementor-type",
+                "data-elementor-id",
+                "data-elementor-post-type",
+                "data-id",
+                "data-element_type",
+                "data-e-type",
+                "data-widget_type"
+              ],
+              "embedded_js": []
+            },
+            {
+              "page": "checkout",
+              "forms": [
+                {
+                  "action": "",
+                  "method": "POST"
+                }
+              ],
+              "hidden_inputs": [
+                "billing_departamento",
+                "billing_departamento_id",
+                "billing_state",
+                "shipping_state",
+                "billing_provincia",
+                "billing_provincia_id",
+                "billing_city",
+                "shipping_city",
+                "billing_distrito",
+                "billing_distrito_id",
+                "billing_country",
+                "billing_address_2",
+                "billing_postcode",
+                "shipping_postcode",
+                "shipping_country",
+                "cart[b4abf3d319afe2544a5dd0966141ef10][qty]",
+                "wskpppt_voucher_base64_1",
+                "wskpppt_voucher_name_1",
+                "wskpppt_voucher_base64_2",
+                "wskpppt_voucher_name_2",
+                "woocommerce-process-checkout-nonce",
+                "_wp_http_referer"
+              ],
+              "json_ld": {},
+              "html_ids": [
+                "wscc-stepsNav",
+                "campos-boleta",
+                "campos-factura",
+                "documento_identidad",
+                "documento_identidad_factura",
+                "razon_social_nombre",
+                "billing_first_name",
+                "billing_last_name",
+                "billing_doc_number",
+                "billing_phone",
+                "billing_email",
+                "campos-depacho",
+                "wscc_departamento_id",
+                "wscc_provincia_id",
+                "wscc_distrito_id",
+                "resumen-metodos-despacho",
+                "mapa_direccion",
+                "map",
+                "mapa_tienda",
+                "map_tienda",
+                "billing_address_1",
+                "google-address-suggestions",
+                "billing_reference",
+                "otra-persona-wrap",
+                "otra_persona_nombre",
+                "info_adic_toggle",
+                "info_adic_wrap",
+                "informacion_adicional",
+                "total-checkout",
+                "payment_method_wskpppt_voucher",
+                "payment_method_fullculqi",
+                "wskpppt_file_picker_main",
+                "file-name-1",
+                "file-name-2",
+                "base64_1",
+                "name_1",
+                "base64_2",
+                "name_2",
+                "accept_terms",
+                "accept_privacy",
+                "woocommerce-process-checkout-nonce",
+                "place_order",
+                "wscc-stickyBack",
+                "wscc-stickyAction"
+              ],
+              "html_classes": [
+                "wscc-page",
+                "wscc-checkout",
+                "wscc-main",
+                "wscc-steps",
+                "wscc-step-pill",
+                "wscc-panel",
+                "wscc-active",
+                "wscc-subcard",
+                "checkout-tipocomprobante",
+                "tipocomprobante-select",
+                "tipo-doc-main",
+                "tipo-doc",
+                "woocommerce-input-wrapper",
+                "woocommerce-form__label",
+                "woocommerce-form__label-for-checkbox",
+                "woocommerce-form__input",
+                "woocommerce-form__input-checkbox",
+                "woocommerce-form__label-text",
+                "validate-required",
+                "input-radio",
+                "input-text",
+                "select",
+                "pac-target-input",
+                "wc_payment_methods",
+                "payment_methods",
+                "methods",
+                "wc_payment_method",
+                "payment_method_wskpppt_voucher",
+                "payment_method_fullculqi",
+                "payment_box",
+                "wsk-checkout-container",
+                "wc-culqi-container",
+                "wc-culqi-title",
+                "wc-culqi-icon",
+                "wscc-delivery-list",
+                "wscc-row-total",
+                "wscc-ship-amount-label",
+                "wscc-grand-total",
+                "wscc-grand-total-label",
+                "product-total",
+                "product-quantity",
+                "button",
+                "alt"
+              ],
+              "data_attributes": [
+                "data-step",
+                "data-panel",
+                "data-order_button_text"
+              ],
+              "embedded_js": [
+                "jQuery(document).ready",
+                "wsccGoToStep",
+                "wsccPrevStepAction",
+                "navigator.clipboard.writeText",
+                "document.getElementById",
+                "woocommerce-process-checkout-nonce"
+              ]
+            },
+            {
+              "page": "product",
+              "forms": [
+                {
+                  "action": "https://compuciber.com/producto/impresora-termica-pos-star-wp-q2b-58mm-interfaz-usbbluetooth-58mm/",
+                  "method": "post"
+                }
+              ],
+              "hidden_inputs": [
+                "gtm4wp_product_data",
+                "rkwyjh9629"
+              ],
+              "json_ld": {},
+              "html_ids": [
+                "product-17176",
+                "carousel-323",
+                "tab-title-description",
+                "tab-title-additional_information",
+                "tab-description",
+                "tab-additional_information",
+                "main-content"
+              ],
+              "html_classes": [
+                "product",
+                "type-product",
+                "post-17176",
+                "product-type-simple",
+                "instock",
+                "sale",
+                "woocommerce-notices-wrapper",
+                "woocommerce-product-gallery",
+                "woocommerce-product-gallery--with-images",
+                "woocommerce-product-gallery__wrapper",
+                "woocommerce-product-gallery__image",
+                "woocommerce-product-details__short-description",
+                "woocommerce-tabs",
+                "wc-tabs-wrapper",
+                "wc-tabs",
+                "wc-tab",
+                "cart",
+                "quantity",
+                "qty",
+                "single_add_to_cart_button",
+                "add_to_cart_button",
+                "ajax_add_to_cart",
+                "product_type_simple",
+                "add-to-cart-loop",
+                "gtm4wp_productdata",
+                "wpa_hidden_field",
+                "stock",
+                "in-stock",
+                "product_meta",
+                "sku_wrapper",
+                "posted_in",
+                "product-labels",
+                "onsale",
+                "wd-product",
+                "wd-product-wrapper",
+                "wd-product-thumb",
+                "wd-product-img-link",
+                "wd-product-img-hover",
+                "wd-add-btn",
+                "wd-carousel",
+                "wd-carousel-container",
+                "wd-gallery-images",
+                "wd-gallery-thumb",
+                "wd-nav-arrows",
+                "wd-products-nav",
+                "woodmart-show-product-gallery"
+              ],
+              "data_attributes": [
+                "data-optimized",
+                "data-thumb",
+                "data-thumb-alt",
+                "data-caption",
+                "data-src",
+                "data-large_image",
+                "data-large_image_width",
+                "data-large_image_height",
+                "data-elementor-open-lightbox",
+                "data-state",
+                "data-layout",
+                "data-accordion-index",
+                "data-scroll_per_page",
+                "data-loop",
+                "data-id",
+                "data-product_id",
+                "data-product_sku",
+                "data-quantity",
+                "data-success_message",
+                "data-gtm4wp_product_data",
+                "data-message-author-role",
+                "data-message-id",
+                "data-message-model-slug"
+              ],
+              "embedded_js": [
+                "jQuery",
+                "calcular_precio",
+                "gtm4wp_product_data"
+              ]
+            },
+            {
+              "page": "account_login",
+              "forms": [
+                {
+                  "action": "https://compuciber.com/mi-cuenta/?action=login",
+                  "method": "post"
+                }
+              ],
+              "hidden_inputs": [
+                "wpa_initiator",
+                "rkwyjh9629",
+                "woocommerce-login-nonce",
+                "_wp_http_referer"
+              ],
+              "json_ld": {},
+              "html_ids": [
+                "main-content",
+                "post-11",
+                "username",
+                "password",
+                "wpa_initiator",
+                "woocommerce-login-nonce",
+                "altEmail_container",
+                "alt_s"
+              ],
+              "html_classes": [
+                "post-11",
+                "type-page",
+                "status-publish",
+                "woocommerce",
+                "woocommerce-notices-wrapper",
+                "wd-registration-page",
+                "wd-no-registration",
+                "login",
+                "woocommerce-form",
+                "woocommerce-form-login",
+                "woocommerce-FormRow",
+                "woocommerce-FormRow--wide",
+                "password-input",
+                "show-password-input",
+                "wpa_initiator",
+                "altEmail_container",
+                "wpa_hidden_field",
+                "woocommerce-button",
+                "woocommerce-form-login__submit",
+                "woocommerce-LostPassword",
+                "lost_password",
+                "woocommerce-form__label",
+                "woocommerce-form__label-for-checkbox",
+                "woocommerce-form-login__rememberme",
+                "woocommerce-form__input",
+                "woocommerce-form__input-checkbox"
+              ],
+              "data_attributes": [],
+              "embedded_js": []
+            },
+            {
+              "page": "mini_cart",
+              "forms": [],
+              "hidden_inputs": [],
+              "json_ld": {},
+              "html_ids": [],
+              "html_classes": [
+                "cart-widget-side",
+                "widget_shopping_cart",
+                "widget_shopping_cart_content",
+                "woocommerce-mini-cart",
+                "woocommerce-mini-cart-item",
+                "mini_cart_item",
+                "shopping-cart-widget-body",
+                "shopping-cart-widget-footer",
+                "cart_list",
+                "product_list_widget",
+                "remove_from_cart_button",
+                "woocommerce-mini-cart__total",
+                "woocommerce-mini-cart__buttons",
+                "wc-forward",
+                "qty",
+                "input-text"
+              ],
+              "data_attributes": [
+                "data-key",
+                "data-product_id",
+                "data-cart_item_key",
+                "data-product_sku",
+                "data-success_message"
+              ],
+              "embedded_js": []
+            },
+            {
+              "page": "product",
+              "forms": [
+                {
+                  "action": "https://compuciber.com/producto/ssd-hiksemi-wave-s-256gb-sata-2-5-hk-wave-256/",
+                  "method": "POST"
+                }
+              ],
+              "hidden_inputs": [
+                "gtm4wp_product_data",
+                "rkwyjh9629"
+              ],
+              "json_ld": {},
+              "html_ids": [
+                "wd-woo-single-prod-el-gallery-css",
+                "wd-swiper-css",
+                "wd-swiper-arrows-critical-css",
+                "wd-mod-nav-style-underline-css",
+                "wd-tabs-base-css",
+                "wd-woo-single-prod-el-tabs-opt-layout-tabs-css",
+                "wd-accordion-css",
+                "wd-accordion-elem-wpb-css",
+                "carousel-712",
+                "wd-product-loop-css",
+                "wd-woo-loop-prod-el-base-css",
+                "wd-woo-loop-prod-predefined-css",
+                "wd-product-loop-standard-css",
+                "wd-woo-mod-loop-prod-add-btn-replace-css",
+                "wd-woo-opt-stretch-cont-css",
+                "wd-woo-opt-stretch-cont-predefined-css",
+                "wd-bordered-product-css",
+                "wd-bordered-product-predefined-css",
+                "wd-swiper-pagin-critical-css",
+                "tab-title-description",
+                "tab-title-additional_information",
+                "tab-description",
+                "tab-additional_information"
+              ],
+              "html_classes": [
+                "woocommerce-product-gallery",
+                "woocommerce-product-gallery--with-images",
+                "woocommerce-product-gallery__wrapper",
+                "woocommerce-product-gallery__image",
+                "woocommerce-product-details__short-description",
+                "woocommerce-tabs",
+                "wc-tabs-wrapper",
+                "wc-tabs",
+                "wc-tab",
+                "woocommerce-Tabs-panel",
+                "woocommerce-Tabs-panel--description",
+                "woocommerce-Tabs-panel--additional_information",
+                "woocommerce-product-attributes",
+                "woocommerce-product-attributes-item",
+                "woocommerce-product-attributes-item--weight",
+                "woocommerce-product-attributes-item--dimensions",
+                "woocommerce-product-attributes-item--attribute_pa_almacenamiento",
+                "woocommerce-product-attributes-item--attribute_pa_marca",
+                "cart",
+                "quantity",
+                "qty",
+                "single_add_to_cart_button",
+                "add_to_cart_button",
+                "ajax_add_to_cart",
+                "product_type_simple",
+                "product",
+                "type-product",
+                "product-type-simple",
+                "post-18306",
+                "post-18583",
+                "gtm4wp_productdata",
+                "wpa_hidden_field",
+                "wa-order-class",
+                "woodmart-show-product-gallery",
+                "related-products",
+                "wd-product",
+                "wd-carousel",
+                "wd-carousel-container",
+                "wd-gallery-images",
+                "wd-gallery-thumb"
+              ],
+              "data_attributes": [
+                "data-accordion-index",
+                "data-caption",
+                "data-elementor-open-lightbox",
+                "data-gtm4wp_product_data",
+                "data-id",
+                "data-large_image",
+                "data-large_image_height",
+                "data-large_image_width",
+                "data-layout",
+                "data-loop",
+                "data-product_id",
+                "data-product_sku",
+                "data-quantity",
+                "data-scroll_per_page",
+                "data-src",
+                "data-state",
+                "data-success_message",
+                "data-thumb",
+                "data-thumb-alt"
+              ],
+              "embedded_js": [
+                {
+                  "type": "inline",
+                  "purpose": "dynamic_price_calculation",
+                  "functions": [
+                    "calcular_precio"
+                  ],
+                  "dependencies": [
+                    "jQuery"
+                  ],
+                  "dom_hooks": [
+                    ".comision-detalle",
+                    ".comision-precio",
+                    ".summary-inner .price",
+                    ".woocommerce-Price-amount"
+                  ],
+                  "behavior": [
+                    "extract_product_price_from_DOM",
+                    "calculate_card_price_4.5_percent_markup",
+                    "inject_updated_price",
+                    "toggle_price_panel",
+                    "prevent_default_link_action"
+                  ]
+                },
+                {
+                  "type": "gtm",
+                  "variable": "gtm4wp_product_data",
+                  "contains": [
+                    "internal_id",
+                    "item_id",
+                    "item_name",
+                    "sku",
+                    "price",
+                    "stocklevel",
+                    "stockstatus",
+                    "google_business_vertical",
+                    "item_category",
+                    "productlink",
+                    "item_list_name",
+                    "index",
+                    "product_type",
+                    "item_brand",
+                    "id"
+                  ]
+                },
+                {
+                  "type": "woocommerce_add_to_cart",
+                  "submission_fields": [
+                    "quantity",
+                    "add-to-cart"
+                  ]
+                },
+                {
+                  "type": "ajax_add_to_cart",
+                  "trigger": "ajax_add_to_cart",
+                  "parameters": [
+                    "data-product_id",
+                    "data-product_sku",
+                    "data-quantity",
+                    "data-success_message"
+                  ]
+                }
+              ]
+            }
+          ],
+          "database_inference": {
+            "wp_terms": [
+              "category",
+              "post_tag",
+              "nav_menu",
+              "wp_pattern_category",
+              "cms_block_cat",
+              "wd_popup_cat",
+              "wd_floating_block_cat",
+              "project-cat",
+              "product_brand",
+              "product_cat",
+              "product_tag",
+              "pa_marca",
+              "pa_procesador",
+              "pa_color"
+            ],
+            "wp_term_taxonomy": [
+              {
+                "taxonomy": "category",
+                "hierarchical": true
+              },
+              {
+                "taxonomy": "post_tag",
+                "hierarchical": false
+              },
+              {
+                "taxonomy": "nav_menu",
+                "hierarchical": false
+              },
+              {
+                "taxonomy": "wp_pattern_category",
+                "hierarchical": false
+              },
+              {
+                "taxonomy": "cms_block_cat",
+                "hierarchical": true
+              },
+              {
+                "taxonomy": "wd_popup_cat",
+                "hierarchical": true
+              },
+              {
+                "taxonomy": "wd_floating_block_cat",
+                "hierarchical": true
+              },
+              {
+                "taxonomy": "project-cat",
+                "hierarchical": true
+              },
+              {
+                "taxonomy": "product_brand",
+                "hierarchical": true
+              },
+              {
+                "taxonomy": "product_cat",
+                "hierarchical": true
+              },
+              {
+                "taxonomy": "product_tag",
+                "hierarchical": false
+              },
+              {
+                "taxonomy": "pa_marca",
+                "hierarchical": false
+              },
+              {
+                "taxonomy": "pa_procesador",
+                "hierarchical": false
+              },
+              {
+                "taxonomy": "pa_color",
+                "hierarchical": false
+              }
+            ],
+            "wp_term_relationships": [
+              {
+                "object_type": "post",
+                "taxonomy": [
+                  "category",
+                  "post_tag"
+                ]
+              },
+              {
+                "object_type": "product",
+                "taxonomy": [
+                  "product_brand",
+                  "product_cat",
+                  "product_tag",
+                  "pa_marca",
+                  "pa_procesador",
+                  "pa_color"
+                ]
+              },
+              {
+                "object_type": "portfolio",
+                "taxonomy": [
+                  "project-cat"
+                ]
+              },
+              {
+                "object_type": "cms_block",
+                "taxonomy": [
+                  "cms_block_cat"
+                ]
+              },
+              {
+                "object_type": "wd_popup",
+                "taxonomy": [
+                  "wd_popup_cat"
+                ]
+              },
+              {
+                "object_type": "wd_floating_block",
+                "taxonomy": [
+                  "wd_floating_block_cat"
+                ]
+              }
+            ]
+          }
+        },
+        "taxonomy_examples": {
+          "product_cat": [
+            {
+              "rest_base": "product_cat",
+              "hierarchical": true,
+              "terms": [
+                "adaptador-de-video",
+                "adaptadores",
+                "componentes-pc",
+                "fuente-de-poder",
+                "procesadores",
+                "accesorios-red",
+                "redes",
+                "accesorios-computadoras",
+                "cables-accesorios-computadoras",
+                "repuestos-canon",
+                "repuestos-de-impresoras",
+                "auriculares"
+              ]
+            }
+          ],
+          "product_tag": [
+            {
+              "rest_base": "product_tag",
+              "hierarchical": false
+            }
+          ],
+          "brands": [
+            "product_brand",
+            {
+              "taxonomy": "product_brand",
+              "rest_base": "product_brand",
+              "hierarchical": true
+            }
+          ],
+          "attributes": [
+            "category",
+            "post_tag",
+            "nav_menu",
+            "wp_pattern_category",
+            "project-cat",
+            "cms_block_cat",
+            "wd_popup_cat",
+            "wd_floating_block_cat",
+            "pa_marca",
+            "pa_procesador",
+            "pa_color"
+          ]
+        },
+        "urls": {
+          "sample_product_urls": [
+            "/tienda/",
+            "/producto/adaptador-ugreen-md112-mini-displayport-m-a-hdmi-h-4k-black-40360/",
+            "/producto/fuente-de-poder-cybertel-sx2000-atx-230w-flat-cables/"
+          ],
+          "sample_category_urls": [
+            "/categoria-producto/adaptadores/adaptador-de-video/",
+            "/categoria-producto/componentes-pc/fuente-de-poder/"
+          ],
+          "sample_account_urls": [],
+          "sample_checkout_urls": []
+        }
+    },
+    "new_evidence": {
+        "dom_analysis": "By analyzing the DOM, specifically the classes wooco_wrap and wooco_component, I have identified the exact technology stack. This is not a standard WooCommerce Simple or Variable product. The site is utilizing the WPC Composite Products for WooCommerce plugin. In the WordPress database (wp_postmeta), WPC Composite Products does not store separate rows for every component. Instead, it serializes a massive array (or JSON string) under a specific meta key, usually wooco_components.",
+        "wpc_composite_schema_sku_43651": {
+            "post_id": 43651,
+            "product_type": "composite",
+            "plugin_dependency": "WPC Composite Products for WooCommerce",
+            "inferred_wp_postmeta": {
+              "_price": "5932.85",
+              "_regular_price": "5960.91",
+              "_sale_price": "5932.85",
+              "wooco_components": [
+                {
+                  "component_id": "9qg4",
+                  "name": "ELIGE LOS COMPONENTES A TU MEDIDA",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 19729,
+                  "selected_product_name": "PROCESADOR INTEL CORE I7-12700KF 3.60GHZ HASTA 5.0GHZ LGA1700 25MB CACHE P/N: BX8071512700KF",
+                  "quantity": 1,
+                  "price": 1140.00
+                },
+                {
+                  "component_id": "xekx",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 36229,
+                  "selected_product_name": "PLACA ASUS PRIME B760M-A D4 M.ATX DDR4 LGA 1700 (PN:90MB1D00'M1EAY0)",
+                  "quantity": 1,
+                  "price": 410.27,
+                  "available_options": [36229, 31834]
+                },
+                {
+                  "component_id": "gjwx",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": true,
+                  "selected_product_id": 43430,
+                  "selected_product_name": "MEMORIA RAM HIKSEMI ARMOR 16GB DDR4 3200MHz BLACK (HA1632D4)",
+                  "quantity": 1,
+                  "price": 637.50,
+                  "available_options": [43430, 43404]
+                },
+                {
+                  "component_id": "1gg7",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 43162,
+                  "selected_product_name": "SSD MSI SPATIUM M560, 1TB M.2 PCIe 5.0 NVMe",
+                  "quantity": 1,
+                  "price": 901.25
+                },
+                {
+                  "component_id": "gqqd",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 43350,
+                  "selected_product_name": "VGA PALIT GEFORCE RTX 3050 StormX 6GB GDDR6 (3050PALIT6G)",
+                  "quantity": 1,
+                  "price": 1257.50,
+                  "available_options": [43350, 45779, 45761, 45601, 45606, 45597, 45592, 45585, 45578, 45570, 45560]
+                },
+                {
+                  "component_id": "eqgn",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 43112,
+                  "selected_product_name": "FUENTE DE PODER ANTEC ATOM G750, 80 PLUS GOLD, SEMI MODULAR, 750W",
+                  "quantity": 1,
+                  "price": 337.50,
+                  "available_options": [43112, 45779, 45761, 45601, 45606, 45597, 45592, 45585, 45578, 45570, 45560]
+                },
+                {
+                  "component_id": "rzok",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 19555,
+                  "selected_product_name": "CASE GAMER GAMEMAX CONTAC COC TURBO 1FAN COLOR BLANCO",
+                  "quantity": 1,
+                  "price": 270.00,
+                  "available_options": [42909, 42921, 19555]
+                },
+                {
+                  "component_id": "3h10",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": true,
+                  "selected_product_id": 24697,
+                  "selected_product_name": "MONITOR VIEWSONIC XG2405 IPS 23.8\" 1920X1080P 1MS 144HZ HDMI",
+                  "quantity": 1,
+                  "price": 350.00
+                },
+                {
+                  "component_id": "9xar",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 28706,
+                  "selected_product_name": "KIT MSI FORGE GK300 GAMING TECLADO Y MOUSE USB (Interruptores mecánicos azules)",
+                  "quantity": 1,
+                  "price": 159.00,
+                  "available_options": [28706, 39114, 19895]
+                },
+                {
+                  "component_id": "f1ep",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 39498,
+                  "selected_product_name": "ESTABILIZADOR CDP R-AVR1808I 1800VA/1000W 8 SALIDAS (R-AVR1808I)",
+                  "quantity": 1,
+                  "price": 107.33,
+                  "available_options": [39498, 39513]
+                },
+                {
+                  "component_id": "obft",
+                  "name": "",
+                  "is_required": true,
+                  "allow_custom_qty": false,
+                  "selected_product_id": 43635,
+                  "selected_product_name": "COOLER DE PROCESADOR DEEPCOOL AK500 ZERO DARK",
+                  "quantity": 1,
+                  "price": 362.50
+                }
+              ],
+              "gtm_data": {
+                "internal_id": 43651,
+                "item_category": "COMPUTADORAS COMPLETAS",
+                "stockstatus": "instock"
+              }
+            }
+          }
+    }
+}

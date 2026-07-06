@@ -1,0 +1,195 @@
+{
+    "json_ld": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/",
+            "url": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/",
+            "name": "COMPUTADORA GAMER CORE I7 12700KF - COMPUCIBER",
+            "isPartOf": {
+              "@id": "https://compuciber.com/#website"
+            },
+            "primaryImageOfPage": {
+              "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/#primaryimage"
+            },
+            "image": {
+              "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/#primaryimage"
+            },
+            "thumbnailUrl": "https://compuciber.com/wp-content/uploads/2026/03/computadora-gamer-core-i7-12700kf1-2.jpg",
+            "datePublished": "2026-03-27T20:23:56+00:00",
+            "dateModified": "2026-04-06T23:01:27+00:00",
+            "description": "Equipo gamer con Intel Core Ultra 5 225F, 16 GB de RAM y SSD de 1 TB — rendimiento equilibrado para juegos y multitarea.",
+            "breadcrumb": {
+              "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/#breadcrumb"
+            },
+            "inLanguage": "es",
+            "potentialAction": [
+              {
+                "@type": "ReadAction",
+                "target": [
+                  "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/"
+                ]
+              }
+            ]
+          },
+          {
+            "@type": "ImageObject",
+            "inLanguage": "es",
+            "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/#primaryimage",
+            "url": "https://compuciber.com/wp-content/uploads/2026/03/computadora-gamer-core-i7-12700kf1-2.jpg",
+            "contentUrl": "https://compuciber.com/wp-content/uploads/2026/03/computadora-gamer-core-i7-12700kf1-2.jpg",
+            "width": 1000,
+            "height": 1000
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Portada",
+                "item": "https://compuciber.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tienda",
+                "item": "https://compuciber.com/tienda/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "COMPUTADORA GAMER CORE I7 12700KF"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://compuciber.com/#website",
+            "url": "https://compuciber.com/",
+            "name": "COMPUCIBER",
+            "description": "Tienda Informática",
+            "publisher": {
+              "@id": "https://compuciber.com/#organization"
+            },
+            "potentialAction": [
+              {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://compuciber.com/?s={search_term_string}"
+  
+                },
+                "query-input": {
+                  "@type": "PropertyValueSpecification",
+                  "valueRequired": true,
+                  "valueName": "search_term_string"
+                }
+              }
+            ],
+            "inLanguage": "es"
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://compuciber.com/#organization",
+            "name": "COMPUCIBER",
+            "url": "https://compuciber.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "inLanguage": "es",
+              "@id": "https://compuciber.com/#/schema/logo/image/",
+              "url": "https://compuciber.com/wp-content/uploads/2023/07/LOGO-COMPUCIBER.png",
+              "contentUrl": "https://compuciber.com/wp-content/uploads/2023/07/LOGO-COMPUCIBER.png",
+              "width": 1536,
+              "height": 237,
+              "caption": "COMPUCIBER"
+            },
+            "image": {
+              "@id": "https://compuciber.com/#/schema/logo/image/"
+            },
+            "sameAs": [
+              "https://www.facebook.com/compuciberperu",
+              "https://www.instagram.com/compucibersac",
+              "https://www.tiktok.com/@compucibersac",
+              "https://www.youtube.com/@compucibertecnologia4529"
+            ]
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org/",
+        "@graph": [
+          {
+            "@context": "https://schema.org/",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "name": "Inicio",
+                  "@id": "https://compuciber.com"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "name": "COMPUTADORAS COMPLETAS",
+                  "@id": "https://compuciber.com/categoria-producto/computadoras-completas/"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "name": "COMPUTADORA GAMER CORE I7 12700KF",
+                  "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/"
+                }
+              }
+            ]
+          },
+          {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "@id": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/#product",
+            "name": "COMPUTADORA GAMER CORE I7 12700KF",
+            "url": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/",
+            "description": "Equipo gamer con Intel Core Ultra 5 225F, 16 GB de RAM y SSD de 1 TB — rendimiento equilibrado para juegos y multitarea.",
+            "image": "https://compuciber.com/wp-content/uploads/2026/03/computadora-gamer-core-i7-12700kf1-2.jpg",
+            "sku": 43651,
+            "offers": [
+              {
+                "@type": "Offer",
+                "priceSpecification": [
+                  {
+                    "@type": "UnitPriceSpecification",
+                    "price": "0.00",
+                    "priceCurrency": "PEN",
+                    "validThrough": "2027-12-31",
+                    "valueAddedTaxIncluded": false
+                  }
+                ],
+                "priceValidUntil": "2027-12-31",
+                "availability": "https://schema.org/InStock",
+                "url": "https://compuciber.com/producto/computadora-gamer-core-i7-12700kf/",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "COMPUCIBER",
+                  "url": "https://compuciber.com"
+                },
+                "price": "0.00",
+                "priceCurrency": "PEN"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "rendered_attributes": {},
+    "variation_meta": null,
+    "error": null
+  }

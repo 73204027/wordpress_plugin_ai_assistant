@@ -1,0 +1,33 @@
+{
+    "page": "mini_cart",
+    "forms": [],
+    "hidden_inputs": [],
+    "json_ld": {},
+    "html_ids": [],
+    "html_classes": [
+      "cart-widget-side",
+      "widget_shopping_cart",
+      "widget_shopping_cart_content",
+      "woocommerce-mini-cart",
+      "woocommerce-mini-cart-item",
+      "mini_cart_item",
+      "shopping-cart-widget-body",
+      "shopping-cart-widget-footer",
+      "cart_list",
+      "product_list_widget",
+      "remove_from_cart_button",
+      "woocommerce-mini-cart__total",
+      "woocommerce-mini-cart__buttons",
+      "wc-forward",
+      "qty",
+      "input-text"
+    ],
+    "data_attributes": [
+      "data-key",
+      "data-product_id",
+      "data-cart_item_key",
+      "data-product_sku",
+      "data-success_message"
+    ],
+    "embedded_js": []
+  }

@@ -1,0 +1,256 @@
+>>> REQUEST >>>
+METHOD: GET
+URL: https://compuciber.com/
+HTTP VERSION: h3
+
+REQUEST HEADERS:
+    :authority: compuciber.com
+    :method: GET
+    :path: /
+    :scheme: https
+    accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+    accept-encoding: gzip, deflate, br
+    accept-language: en-US,en;q=0.9,es;q=0.8
+    cache-control: no-cache
+    cookie: _lscache_vary=0d88bbd51bc386a3804b0cc9e105d7ae; _ga=GA1.1.453284647.1783203688; sbjs_migrations=1418474375998%3D1; sbjs_first_add=fd%3D2026-07-04%2022%3A21%3A35%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7rqSTkcFL_IvNnZiyUWg0un3CJ-9ey3C0N4P8uKen9ZvYMYGDruUEaAsDDEALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F; sbjs_current=typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; sbjs_first=typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; woocommerce_items_in_cart=1; wp_woocommerce_session_1fe624276560f4cbdd48e327aa9cbd6f=t_6f640858ec89b6ae312ed49bb19326%7C1783379452%7C1783293052%7C%24generic%2426AP5u3flFzTZ6d2dXLHe7urgYIQc_ou0AGsMhd8; woocommerce_cart_hash=15ddd4557b7f67cd274e9d847b67c57f; _gcl_gs=2.1.k1$i1783207079$u131983901; sbjs_current_add=fd%3D2026-07-04%2023%3A18%3A09%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F; _gcl_aw=GCL.1783207108.Cj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB; sbjs_udata=vst%3D3%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F109.0.0.0%20Safari%2F537.36; _gcl_au=1.1.410897434.1783203687.1446454269.1783213728.1783213920; woodmart_recently_viewed_products=17176|43282|29628; _ga_GQMGCTWH2G=GS2.1.s1783213555$o3$g1$t1783217022$j48$l0$h0; sbjs_session=pgs%3D22%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fcompuciber.com%2F
+    pragma: no-cache
+    sec-ch-ua: 'Not_A Brand';v='99', 'Google Chrome';v='109', 'Chromium';v='109'
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: 'Windows'
+    sec-fetch-dest: document
+    sec-fetch-mode: navigate
+    sec-fetch-site: none
+    sec-fetch-user: ?1
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36
+
+REQUEST COOKIES:
+    _lscache_vary: 0d88bbd51bc386a3804b0cc9e105d7ae
+      Domain: compuciber.com
+      Path: /
+      Expires: 2026-07-06T22:21:27.631Z
+      HttpOnly: true
+      Secure: true
+    _ga: GA1.1.453284647.1783203688
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2027-08-09T02:03:42.828Z
+    sbjs_migrations: 1418474375998%3D1
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    sbjs_first_add: fd%3D2026-07-04%2022%3A21%3A35%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7rqSTkcFL_IvNnZiyUWg0un3CJ-9ey3C0N4P8uKen9ZvYMYGDruUEaAsDDEALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    sbjs_current: typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    sbjs_first: typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    woocommerce_items_in_cart: 1
+      Domain: compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+      Secure: true
+    wp_woocommerce_session_1fe624276560f4cbdd48e327aa9cbd6f: t_6f640858ec89b6ae312ed49bb19326%7C1783379452%7C1783293052%7C%24generic%2426AP5u3flFzTZ6d2dXLHe7urgYIQc_ou0AGsMhd8
+      Domain: compuciber.com
+      Path: /
+      Expires: 2026-07-06T23:10:50.968Z
+      HttpOnly: true
+      Secure: true
+    woocommerce_cart_hash: 15ddd4557b7f67cd274e9d847b67c57f
+      Domain: compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+      Secure: true
+    _gcl_gs: 2.1.k1$i1783207079$u131983901
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-10-02T23:18:06.000Z
+    sbjs_current_add: fd%3D2026-07-04%2023%3A18%3A09%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    _gcl_aw: GCL.1783207108.Cj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-10-02T23:18:28.000Z
+    sbjs_udata: vst%3D3%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F109.0.0.0%20Safari%2F537.36
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    _gcl_au: 1.1.410897434.1783203687.1446454269.1783213728.1783213920
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-10-02T22:21:27.000Z
+    woodmart_recently_viewed_products: 17176|43282|29628
+      Domain: compuciber.com
+      Path: /
+      Expires: 2026-07-12T01:55:40.000Z
+      Secure: true
+    _ga_GQMGCTWH2G: GS2.1.s1783213555$o3$g1$t1783217022$j48$l0$h0
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2027-08-09T02:03:42.827Z
+    sbjs_session: pgs%3D22%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fcompuciber.com%2F
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-07-05T02:33:50.000Z
+REQUEST BODY SIZE: 0 bytes
+
+<<< RESPONSE <<<
+STATUS: 200 
+HTTP VERSION: h3
+
+RESPONSE HEADERS:
+    content-encoding: br
+    content-length: 177320
+    content-security-policy: upgrade-insecure-requests
+    content-type: text/html; charset=UTF-8
+    date: Sun, 05 Jul 2026 02:04:04 GMT
+    etag: '316614-1783214799;br'
+    link: <https://compuciber.com/wp-json/>; rel='https://api.w.org/'
+    link: <https://compuciber.com/wp-json/wp/v2/pages/16638>; rel='alternate'; title='JSON'; type='application/json'
+    link: <https://compuciber.com/>; rel=shortlink
+    panel: hpanel
+    platform: hostinger
+    server: LiteSpeed
+    server-timing: wp-before-template;dur=414.78
+    vary: Accept-Encoding
+    x-dns-prefetch-control: on
+    x-litespeed-cache: hit
+    x-powered-by: PHP/8.3.30
+
+RESPONSE CONTENT:
+  Size: 856173 bytes
+  Compression: 0 bytes saved
+  MIME Type: text/html
+  Content Preview: <!DOCTYPE html><html lang='es'><head><script data-no-optimize='1'>var litespeed_docref=sessionStorage.getItem('litespeed_docref');litespeed_docref&&(Object.defineProperty(document,'referrer',{get:func... [TRUNCATED]
+
+TIMINGS:
+    Blocked: 10.76ms
+    Send: 0.70ms
+    Wait: 203.04ms
+    Receive: 71.42ms
+
+>>> REQUEST >>>
+METHOD: POST
+URL: https://compuciber.com/wp-admin/admin-ajax.php
+HTTP VERSION: h3
+
+REQUEST HEADERS:
+    :authority: compuciber.com
+    :method: POST
+    :path: /wp-admin/admin-ajax.php
+    :scheme: https
+    accept: application/json, text/javascript, */*; q=0.01
+    accept-encoding: gzip, deflate, br
+    accept-language: en-US,en;q=0.9,es;q=0.8
+    cache-control: no-cache
+    content-length: 59
+    content-type: application/x-www-form-urlencoded; charset=UTF-8
+    cookie: _lscache_vary=0d88bbd51bc386a3804b0cc9e105d7ae; _ga=GA1.1.453284647.1783203688; sbjs_migrations=1418474375998%3D1; sbjs_first_add=fd%3D2026-07-04%2022%3A21%3A35%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7rqSTkcFL_IvNnZiyUWg0un3CJ-9ey3C0N4P8uKen9ZvYMYGDruUEaAsDDEALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F; sbjs_current=typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; sbjs_first=typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; woocommerce_items_in_cart=1; wp_woocommerce_session_1fe624276560f4cbdd48e327aa9cbd6f=t_6f640858ec89b6ae312ed49bb19326%7C1783379452%7C1783293052%7C%24generic%2426AP5u3flFzTZ6d2dXLHe7urgYIQc_ou0AGsMhd8; woocommerce_cart_hash=15ddd4557b7f67cd274e9d847b67c57f; _gcl_gs=2.1.k1$i1783207079$u131983901; sbjs_current_add=fd%3D2026-07-04%2023%3A18%3A09%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F; _gcl_aw=GCL.1783207108.Cj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB; sbjs_udata=vst%3D3%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F109.0.0.0%20Safari%2F537.36; _gcl_au=1.1.410897434.1783203687.1446454269.1783213728.1783213920; woodmart_recently_viewed_products=17176|43282|29628; sbjs_session=pgs%3D23%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fcompuciber.com%2F; _ga_GQMGCTWH2G=GS2.1.s1783213555$o3$g1$t1783217146$j60$l0$h0
+    origin: https://compuciber.com
+    pragma: no-cache
+    referer: https://compuciber.com/
+    sec-ch-ua: 'Not_A Brand';v='99', 'Google Chrome';v='109', 'Chromium';v='109'
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: 'Windows'
+    sec-fetch-dest: empty
+    sec-fetch-mode: cors
+    sec-fetch-site: same-origin
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36
+    x-requested-with: XMLHttpRequest
+
+REQUEST COOKIES:
+    _lscache_vary: 0d88bbd51bc386a3804b0cc9e105d7ae
+      Domain: compuciber.com
+      Path: /
+      Expires: 2026-07-06T22:21:27.631Z
+      HttpOnly: true
+      Secure: true
+    _ga: GA1.1.453284647.1783203688
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2027-08-09T02:04:19.313Z
+    sbjs_migrations: 1418474375998%3D1
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    sbjs_first_add: fd%3D2026-07-04%2022%3A21%3A35%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7rqSTkcFL_IvNnZiyUWg0un3CJ-9ey3C0N4P8uKen9ZvYMYGDruUEaAsDDEALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    sbjs_current: typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    sbjs_first: typ%3Dutm%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dcpc%7C%7C%7Ccmp%3Dgoogle_cpc%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    woocommerce_items_in_cart: 1
+      Domain: compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+      Secure: true
+    wp_woocommerce_session_1fe624276560f4cbdd48e327aa9cbd6f: t_6f640858ec89b6ae312ed49bb19326%7C1783379452%7C1783293052%7C%24generic%2426AP5u3flFzTZ6d2dXLHe7urgYIQc_ou0AGsMhd8
+      Domain: compuciber.com
+      Path: /
+      Expires: 2026-07-06T23:10:50.968Z
+      HttpOnly: true
+      Secure: true
+    woocommerce_cart_hash: 15ddd4557b7f67cd274e9d847b67c57f
+      Domain: compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+      Secure: true
+    _gcl_gs: 2.1.k1$i1783207079$u131983901
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-10-02T23:18:06.000Z
+    sbjs_current_add: fd%3D2026-07-04%2023%3A18%3A09%7C%7C%7Cep%3Dhttps%3A%2F%2Fcompuciber.com%2F%3Fgad_source%3D1%26gad_campaignid%3D22015631944%26gbraid%3D0AAAAACyA-2dYLJTOLp4P5LuHN77nrsds6%26gclid%3DCj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com%2F
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    _gcl_aw: GCL.1783207108.Cj0KCQjw3qLSBhDaARIsAFTiVh7x4u74VB8FeG7XQGQA_4mw73KmyeiJMKVbZzpQyqy_mDn3XJVyU9kaAqO7EALw_wcB
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-10-02T23:18:28.000Z
+    sbjs_udata: vst%3D3%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F109.0.0.0%20Safari%2F537.36
+      Domain: .compuciber.com
+      Path: /
+      Expires: 1969-12-31T23:59:59.000Z
+    _gcl_au: 1.1.410897434.1783203687.1446454269.1783213728.1783213920
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-10-02T22:21:27.000Z
+    woodmart_recently_viewed_products: 17176|43282|29628
+      Domain: compuciber.com
+      Path: /
+      Expires: 2026-07-12T01:55:40.000Z
+      Secure: true
+    sbjs_session: pgs%3D23%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fcompuciber.com%2F
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2026-07-05T02:34:22.000Z
+    _ga_GQMGCTWH2G: GS2.1.s1783213555$o3$g1$t1783217146$j60$l0$h0
+      Domain: .compuciber.com
+      Path: /
+      Expires: 2027-08-09T02:05:46.878Z
+
+POST DATA:
+    MIME Type: application/x-www-form-urlencoded; charset=UTF-8
+    Text Data:
+      paged=NaN&action=woodmart_get_products_shortcode&woo_ajax=1
+    Parameters:
+      paged: NaN
+      action: woodmart_get_products_shortcode
+      woo_ajax: 1
+
+REQUEST BODY SIZE: 59 bytes
+

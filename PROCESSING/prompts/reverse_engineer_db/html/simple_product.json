@@ -1,0 +1,165 @@
+{
+    "page": "product",
+    "forms": [
+      {
+        "action": "https://compuciber.com/producto/ssd-hiksemi-wave-s-256gb-sata-2-5-hk-wave-256/",
+        "method": "POST"
+      }
+    ],
+    "hidden_inputs": [
+      "gtm4wp_product_data",
+      "rkwyjh9629"
+    ],
+    "json_ld": {},
+    "html_ids": [
+      "wd-woo-single-prod-el-gallery-css",
+      "wd-swiper-css",
+      "wd-swiper-arrows-critical-css",
+      "wd-mod-nav-style-underline-css",
+      "wd-tabs-base-css",
+      "wd-woo-single-prod-el-tabs-opt-layout-tabs-css",
+      "wd-accordion-css",
+      "wd-accordion-elem-wpb-css",
+      "carousel-712",
+      "wd-product-loop-css",
+      "wd-woo-loop-prod-el-base-css",
+      "wd-woo-loop-prod-predefined-css",
+      "wd-product-loop-standard-css",
+      "wd-woo-mod-loop-prod-add-btn-replace-css",
+      "wd-woo-opt-stretch-cont-css",
+      "wd-woo-opt-stretch-cont-predefined-css",
+      "wd-bordered-product-css",
+      "wd-bordered-product-predefined-css",
+      "wd-swiper-pagin-critical-css",
+      "tab-title-description",
+      "tab-title-additional_information",
+      "tab-description",
+      "tab-additional_information"
+    ],
+    "html_classes": [
+      "woocommerce-product-gallery",
+      "woocommerce-product-gallery--with-images",
+      "woocommerce-product-gallery__wrapper",
+      "woocommerce-product-gallery__image",
+      "woocommerce-product-details__short-description",
+      "woocommerce-tabs",
+      "wc-tabs-wrapper",
+      "wc-tabs",
+      "wc-tab",
+      "woocommerce-Tabs-panel",
+      "woocommerce-Tabs-panel--description",
+      "woocommerce-Tabs-panel--additional_information",
+      "woocommerce-product-attributes",
+      "woocommerce-product-attributes-item",
+      "woocommerce-product-attributes-item--weight",
+      "woocommerce-product-attributes-item--dimensions",
+      "woocommerce-product-attributes-item--attribute_pa_almacenamiento",
+      "woocommerce-product-attributes-item--attribute_pa_marca",
+      "cart",
+      "quantity",
+      "qty",
+      "single_add_to_cart_button",
+      "add_to_cart_button",
+      "ajax_add_to_cart",
+      "product_type_simple",
+      "product",
+      "type-product",
+      "product-type-simple",
+      "post-18306",
+      "post-18583",
+      "gtm4wp_productdata",
+      "wpa_hidden_field",
+      "wa-order-class",
+      "woodmart-show-product-gallery",
+      "related-products",
+      "wd-product",
+      "wd-carousel",
+      "wd-carousel-container",
+      "wd-gallery-images",
+      "wd-gallery-thumb"
+    ],
+    "data_attributes": [
+      "data-accordion-index",
+      "data-caption",
+      "data-elementor-open-lightbox",
+      "data-gtm4wp_product_data",
+      "data-id",
+      "data-large_image",
+      "data-large_image_height",
+      "data-large_image_width",
+      "data-layout",
+      "data-loop",
+      "data-product_id",
+      "data-product_sku",
+      "data-quantity",
+      "data-scroll_per_page",
+      "data-src",
+      "data-state",
+      "data-success_message",
+      "data-thumb",
+      "data-thumb-alt"
+    ],
+    "embedded_js": [
+      {
+        "type": "inline",
+        "purpose": "dynamic_price_calculation",
+        "functions": [
+          "calcular_precio"
+        ],
+        "dependencies": [
+          "jQuery"
+        ],
+        "dom_hooks": [
+          ".comision-detalle",
+          ".comision-precio",
+          ".summary-inner .price",
+          ".woocommerce-Price-amount"
+        ],
+        "behavior": [
+          "extract_product_price_from_DOM",
+          "calculate_card_price_4.5_percent_markup",
+          "inject_updated_price",
+          "toggle_price_panel",
+          "prevent_default_link_action"
+        ]
+      },
+      {
+        "type": "gtm",
+        "variable": "gtm4wp_product_data",
+        "contains": [
+          "internal_id",
+          "item_id",
+          "item_name",
+          "sku",
+          "price",
+          "stocklevel",
+          "stockstatus",
+          "google_business_vertical",
+          "item_category",
+          "productlink",
+          "item_list_name",
+          "index",
+          "product_type",
+          "item_brand",
+          "id"
+        ]
+      },
+      {
+        "type": "woocommerce_add_to_cart",
+        "submission_fields": [
+          "quantity",
+          "add-to-cart"
+        ]
+      },
+      {
+        "type": "ajax_add_to_cart",
+        "trigger": "ajax_add_to_cart",
+        "parameters": [
+          "data-product_id",
+          "data-product_sku",
+          "data-quantity",
+          "data-success_message"
+        ]
+      }
+    ]
+  }

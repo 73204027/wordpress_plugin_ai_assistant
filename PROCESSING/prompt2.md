@@ -1,0 +1,7 @@
+Alright, good analysis. Now, given the analysis made in this conversation, which may have helped pinpointing the objective, our specific case, the issues we may face and refining the architecture decision and specifications, work as a software architect, identify the best architecture for our project: "E-commerce WordPress + WooCommerce website hosted in Hostinger Premium/Business Plan, featuring a custom business-data-driven customer service AI Agent (LLM) chatbot, and which gets materialized in the form of a WordPress plugin", and give me a kind of 'documentation' explaining it in detail (including panoramic view and worklow of interaction between components) addressed to the developer team, so they can implement it in raw code.
+Extra considerations:
+- website must allow unauthenticaded users/users without account to use the chatbot
+- Our priority is to achieve having Ollama hosted on an external VPS, and wrap it with an API, or use Ollama's default API, so E-commerce communicates with it, instead of only OpenAI or Deepseek API's. However, note that, if we build a simple custom API to wrap Ollama, it may work similar to OpenAI API.
+Indications for the documentation:
+- EXTEND your message as needed
+- Specify IN DETAIL the architecture, components and all... You don't have to send me code implementations or illustrations. Text only

@@ -1,0 +1,83 @@
+{
+    "page": "product_archive",
+    "forms": [
+      {
+        "action": "",
+        "method": "get"
+      }
+    ],
+    "hidden_inputs": [
+      "paged"
+    ],
+    "json_ld": {},
+    "html_ids": [
+      "main-content"
+    ],
+    "html_classes": [
+      "woocommerce-ordering",
+      "orderby",
+      "products",
+      "wd-products",
+      "wd-products-element",
+      "wd-product",
+      "product",
+      "type-product",
+      "product-grid-item",
+      "product-wrapper",
+      "product-type-composite",
+      "product_type_composite",
+      "add_to_cart_button",
+      "add-to-cart-loop",
+      "gtm4wp_productdata",
+      "instock",
+      "purchasable",
+      "taxable",
+      "shipping-taxable",
+      "post-43364",
+      "post-43605",
+      "post-43611",
+      "post-43620",
+      "product_cat-computadoras-completas",
+      "product_cat-computadoras-para-estudiantes-oficinas"
+    ],
+    "data_attributes": [
+      "data-optimized",
+      "data-is-sorted-by",
+      "data-source",
+      "data-min_price",
+      "data-max_price",
+      "data-columns",
+      "data-loop",
+      "data-id",
+      "data-quantity",
+      "data-product_id",
+      "data-product_sku",
+      "data-gtm4wp_product_data"
+    ],
+    "embedded_js": [
+      "gtm4wp_product_data"
+    ],
+    "taxonomy_examples": {
+      "attributes": [
+        "pa_marca",
+        "pa_conectividad",
+        "pa_color",
+        "pa_procesador",
+        "pa_memoria-ram",
+        "pa_almacenamiento",
+        "pa_tarjeta-grafica",
+        "pa_tamano-pantalla",
+        "pa_tipo-pantalla",
+        "pa_resolucion",
+        "pa_frecuencia-de-refresco",
+        "pa_tiempo-de-respuesta",
+        "pa_tipo-cable",
+        "pa_longitud-cable",
+        "pa_tipo-adaptador-video"
+      ],
+      "product_cat": [
+        "computadoras-completas",
+        "computadoras-para-estudiantes-oficinas"
+      ]
+    }
+  }

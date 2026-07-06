@@ -1,0 +1,53 @@
+{
+    "page": "cart",
+    "forms": [
+      {
+        "action": "https://compuciber.com/carrito/",
+        "method": "post"
+      }
+    ],
+    "hidden_inputs": [
+      "woocommerce-cart-nonce",
+      "_wp_http_referer"
+    ],
+    "json_ld": {},
+    "html_ids": [
+      "main-content",
+      "post-9",
+      "woocommerce-cart-nonce"
+    ],
+    "html_classes": [
+      "woocommerce",
+      "woocommerce-cart-form",
+      "woocommerce-cart-form__contents",
+      "woocommerce-cart-form__cart-item",
+      "cart_item",
+      "cart-content-wrapper",
+      "woocommerce-notices-wrapper",
+      "shop_table",
+      "shop_table_responsive",
+      "cart",
+      "wd-cart-action-row",
+      "cart-actions",
+      "cart_totals",
+      "cart-totals-inner",
+      "wc-proceed-to-checkout",
+      "checkout-button",
+      "wc-forward",
+      "remove",
+      "quantity",
+      "qty",
+      "input-text",
+      "post-9",
+      "page",
+      "type-page",
+      "status-publish"
+    ],
+    "data_attributes": [
+      "data-gtm4wp_product_data",
+      "data-product_id",
+      "data-product_sku",
+      "data-title"
+    ],
+    "embedded_js": []
+  }

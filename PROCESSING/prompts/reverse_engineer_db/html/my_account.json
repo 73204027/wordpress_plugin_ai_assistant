@@ -1,0 +1,56 @@
+{
+    "page": "account_login",
+    "forms": [
+      {
+        "action": "https://compuciber.com/mi-cuenta/?action=login",
+        "method": "post"
+      }
+    ],
+    "hidden_inputs": [
+      "wpa_initiator",
+      "rkwyjh9629",
+      "woocommerce-login-nonce",
+      "_wp_http_referer"
+    ],
+    "json_ld": {},
+    "html_ids": [
+      "main-content",
+      "post-11",
+      "username",
+      "password",
+      "wpa_initiator",
+      "woocommerce-login-nonce",
+      "altEmail_container",
+      "alt_s"
+    ],
+    "html_classes": [
+      "post-11",
+      "type-page",
+      "status-publish",
+      "woocommerce",
+      "woocommerce-notices-wrapper",
+      "wd-registration-page",
+      "wd-no-registration",
+      "login",
+      "woocommerce-form",
+      "woocommerce-form-login",
+      "woocommerce-FormRow",
+      "woocommerce-FormRow--wide",
+      "password-input",
+      "show-password-input",
+      "wpa_initiator",
+      "altEmail_container",
+      "wpa_hidden_field",
+      "woocommerce-button",
+      "woocommerce-form-login__submit",
+      "woocommerce-LostPassword",
+      "lost_password",
+      "woocommerce-form__label",
+      "woocommerce-form__label-for-checkbox",
+      "woocommerce-form-login__rememberme",
+      "woocommerce-form__input",
+      "woocommerce-form__input-checkbox"
+    ],
+    "data_attributes": [],
+    "embedded_js": []
+  }
