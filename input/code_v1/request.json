@@ -1,4 +1,3 @@
-``` json
 {
     "request": "Give me the entire production-ready error-defensive code for all components of the system.",
     "references": {
@@ -943,14 +942,9 @@ AI_Assistant_Plugin::instance();",
         },
         "ai_agent_features": "",
         "architecture_documentation": "",
-        "database_reverse_engineering": "",
+        "database_reverse_engineering": {
+            "logical_schema": "",
+            "comments": ""
+        },
         "extra_observations": "- In plugin php code v0 we don't use the term 'aia', but we use 'ai'\n'server_headers': { 'x-powered-by': 'PHP/8.3.30','x-dns-prefetch-control': 'on', 'content-type': 'text/html; charset=UTF-8', 'link': '<https://compuciber.com/>; rel=shortlink', 'x-litespeed-cache-control': 'public,max-age=604800', 'x-litespeed-tag': 'fc9_front,fc9_URL.6666cd76f96956469e7be39d750cc7d9,fc9_F,fc9_Po.16638,fc9_PGS,fc9_guest,fc9_', 'date': 'Sat, 04 Jul 2026 22:40:53 GMT', 'server': 'LiteSpeed', 'platform': 'hostinger', 'panel': 'hpanel', 'content-security-policy': 'upgrade-insecure-requests'}"   
 }
-```
-
-# PRE PROMPT
-//...(agent creation prompt here)...
-
-For complying my requests, you will perform a step by step critical thinking analysis, first, you will identify weak points on which request is unclear, and ask me the best questions for me to clarify it, or make it clear that the decision relies on you based on your expertise. Then, after a pragmatic and implementation-oriented analysis, you will send me the response, making sure to extend as long as you need (use many messages if necessary).
-
-# POST PROMPT

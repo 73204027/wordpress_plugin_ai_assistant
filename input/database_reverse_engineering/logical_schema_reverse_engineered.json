@@ -1,0 +1,164 @@
+{
+  "database_inference": {
+    "assumed_prefix": "wp_",
+    "confidence": "high for WordPress/WooCommerce core; high for WPC Composite presence; medium for exact WPC serialized structure; unknown for HPOS enabled/disabled",
+    "core_tables": [
+      "wp_posts",
+      "wp_postmeta",
+      "wp_terms",
+      "wp_term_taxonomy",
+      "wp_term_relationships",
+      "wp_termmeta",
+      "wp_options",
+      "wp_users",
+      "wp_usermeta",
+      "wp_comments",
+      "wp_commentmeta"
+    ],
+    "woocommerce_tables": [
+      "wp_wc_product_meta_lookup",
+      "wp_wc_product_attributes_lookup",
+      "wp_wc_category_lookup",
+      "wp_woocommerce_order_items",
+      "wp_woocommerce_order_itemmeta",
+      "wp_woocommerce_sessions",
+      "wp_woocommerce_payment_tokens",
+      "wp_woocommerce_payment_tokenmeta",
+      "wp_wc_order_stats",
+      "wp_wc_order_product_lookup",
+      "wp_wc_order_coupon_lookup",
+      "wp_wc_order_tax_lookup",
+      "wp_wc_order_operational_data",
+      "wp_wc_orders",
+      "wp_wc_order_addresses",
+      "wp_wc_orders_meta"
+    ],
+    "main_entities": {
+      "product": {
+        "storage": "wp_posts + wp_postmeta + taxonomy tables",
+        "post_type": "product",
+        "meta_keys": [
+          "_sku",
+          "_price",
+          "_regular_price",
+          "_sale_price",
+          "_stock",
+          "_stock_status",
+          "_manage_stock",
+          "_weight",
+          "_length",
+          "_width",
+          "_height",
+          "_thumbnail_id",
+          "_product_image_gallery",
+          "_product_attributes",
+          "_tax_status",
+          "_tax_class",
+          "_virtual",
+          "_downloadable",
+          "_total_sales",
+          "_wc_average_rating",
+          "_wc_review_count"
+        ],
+        "taxonomies": [
+          "product_type",
+          "product_cat",
+          "product_tag",
+          "product_brand",
+          "pa_marca",
+          "pa_procesador",
+          "pa_color",
+          "pa_conectividad",
+          "pa_memoria-ram",
+          "pa_almacenamiento",
+          "pa_tarjeta-grafica",
+          "pa_tamano-pantalla",
+          "pa_tipo-pantalla",
+          "pa_resolucion",
+          "pa_frecuencia-de-refresco",
+          "pa_tiempo-de-respuesta",
+          "pa_tipo-cable",
+          "pa_longitud-cable",
+          "pa_tipo-adaptador-video"
+        ]
+      },
+      "composite_product": {
+        "plugin": "WPC Composite Products for WooCommerce",
+        "storage": "wp_posts product + wp_postmeta wooco_components",
+        "product_type": "composite",
+        "critical_meta_key": "wooco_components",
+        "relationship_model": "serialized component config referencing child product IDs",
+        "component_child_entity": "normal WooCommerce product"
+      },
+      "order": {
+        "storage": "legacy wp_posts/shop_order + wp_postmeta OR HPOS wp_wc_orders + wp_wc_orders_meta",
+        "status": "unknown whether HPOS is enabled",
+        "line_items": [
+          "wp_woocommerce_order_items",
+          "wp_woocommerce_order_itemmeta"
+        ],
+        "custom_checkout_meta": [
+          "billing_departamento",
+          "billing_departamento_id",
+          "billing_provincia",
+          "billing_provincia_id",
+          "billing_distrito",
+          "billing_distrito_id",
+          "billing_doc_number",
+          "documento_identidad",
+          "documento_identidad_factura",
+          "razon_social_nombre",
+          "billing_reference",
+          "otra_persona_nombre",
+          "informacion_adicional",
+          "wskpppt_voucher_base64_1",
+          "wskpppt_voucher_name_1",
+          "wskpppt_voucher_base64_2",
+          "wskpppt_voucher_name_2"
+        ]
+      },
+      "woodmart_content": {
+        "post_types": [
+          "woodmart_layout",
+          "woodmart_woo_lv",
+          "woodmart_woo_fbt",
+          "cms_block",
+          "wd_popup",
+          "wd_floating_block",
+          "portfolio"
+        ],
+        "taxonomies": [
+          "cms_block_cat",
+          "wd_popup_cat",
+          "wd_floating_block_cat",
+          "project-cat"
+        ],
+        "storage": "wp_posts + wp_postmeta + taxonomy tables + wp_options"
+      },
+      "elementor_content": {
+        "post_types": [
+          "elementor_library",
+          "elementor_snippet",
+          "e-floating-buttons"
+        ],
+        "likely_meta_keys": [
+          "_elementor_data",
+          "_elementor_edit_mode",
+          "_elementor_template_type",
+          "_elementor_version",
+          "_elementor_css"
+        ],
+        "storage": "wp_posts + wp_postmeta"
+      }
+    },
+    "highest_value_unknowns_to_confirm_next": [
+      "Actual database prefix",
+      "Whether HPOS is enabled",
+      "Exact serialized structure of wooco_components",
+      "Exact order item meta keys used by WPC Composite Products",
+      "Exact payment plugin option names for fullculqi and wskpppt_voucher",
+      "Whether product_brand comes from WooCommerce core feature, Woodmart, or another brand plugin",
+      "Whether checkout geographic fields come from a custom plugin, Woodmart customization, or checkout-field plugin"
+    ]
+  }
+}
