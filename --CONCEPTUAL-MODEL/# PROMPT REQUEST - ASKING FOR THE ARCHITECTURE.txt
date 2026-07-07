@@ -1,62 +1,75 @@
-## CONCEPTUALIZING
+# PROMPT: REQUEST => ASKING FOR THE ARCHITECTURE OF THE SYSTEM
+
+Give me the specific and detailed software architecture of an E-commerce WordPress + WooCommerce web system, featuring a custom business-data-driven customer service AI Agent (LLM) ChatBot, with Ollama, including concepts like skills, tools, cli, mcp… which gets materialized in the form of a WordPress plugin.
+"CONCEPTUALIZING
 (human development)
-
 PROTOTYPES FOR AI AGENT:
-- 3RD PARTY SERVICE
-	- 
-- Custom made
-	- OpenAI API
-	- Local Model
-		- MCP + SKILLS + Ollama
-		- SKILLS + CLI + Ollama
-		- hosted n8n + Ollama
 
-
-
-
-## RESULT 1
+3RD PARTY SERVICE
+Custom madeOpenAI API
+Local ModelMCP + SKILLS + Ollama
+SKILLS + CLI + Ollama
+hosted n8n + Ollama
+RESULT 1
 Below is the version I would actually ship first: a single WordPress plugin directory that keeps the chat UI, REST endpoint, Ollama bridge, topic guardrails, and catalog lookup logic together. Ollama supports tool calling through /api/chat, and Modelfile is the place to define FROM, PARAMETER, and SYSTEM; WordPress custom REST routes should be registered on rest_api_init, include permission_callback, and front-end scripts should be loaded with wp_enqueue_script. For browser-to-WordPress REST calls inside WordPress, the standard nonce pattern is wp_create_nonce('wp_rest') plus the X-WP-Nonce header.
-
 I am assuming your product data will be exposed by a REST catalog API. If you later move that adapter into Laravel, Laravel’s HTTP client is the official outgoing-request wrapper on that side.
 
-1) What this design does
-
+What this design does
 It gives you:
-
 a Spanish-only assistant,
-strict topic boundaries,
-a safe redirect when the user is off-topic,
-a hard refusal for sensitive topics,
-product search / comparison / discounts through tools,
-direct product links,
-no arbitrary system execution,
-one plugin directory only.
 
+strict topic boundaries,
+
+a safe redirect when the user is off-topic,
+
+a hard refusal for sensitive topics,
+
+product search / comparison / discounts through tools,
+
+direct product links,
+
+no arbitrary system execution,
+
+one plugin directory only.
 I would not start with fine-tuning. Start with a strong system prompt, strict tool calling, and clean catalog APIs. Fine-tuning becomes useful later, after you have real chat logs and know what the model still gets wrong.
 
-2) Step-by-step
+Step-by-step
+
 Create this folder:
+
 wp-content/plugins/aia-assistant/
+
 Add the files below.
+
 Activate the plugin in WordPress.
+
 Create the Ollama model with the Modelfile below. Ollama documents the ollama create ... -f Modelfile flow and the Modelfile syntax.
+
 Point the plugin settings to:
+
 your local Ollama server,
+
 your catalog API base URL,
+
 your API token if your catalog is protected.
+
 Implement the catalog endpoints in Laravel or your current backend so they return products, prices, discounts, and URLs in the shape expected by the plugin.
+
 Test these cases:
-
-
 product search,
+
 comparison,
+
 discount lookup,
+
 off-topic redirect,
+
 sensitive-topic refusal.
+
 Only after this works, consider extra tools like add-to-cart, quote generation, or support ticket creation. Keep those allowlisted and explicit; do not expose shell, SQL, or filesystem execution.
+
 3) Plugin code
-##### aia-assistant.php
-```php
+aia-assistant.php
 <?php
 /**
  * Plugin Name: AIA Assistant
@@ -707,12 +720,7 @@ final class AIA_Ollama_Client {
 
 register_activation_hook(__FILE__, ['AIA_Assistant_Plugin', 'activate']);
 AIA_Assistant_Plugin::instance();
-
-```
-
-
-##### assets/chat.js
-```javascript
+assets/chat.js
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.querySelector("[data-aia-chat]");
   if (!root || typeof AIA_CHAT === "undefined") return;
@@ -844,10 +852,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-```
-
-##### assets/chat.css
-```css
+assets/chat.css
 .aia-shell {
   position: fixed;
   right: 20px;
@@ -992,74 +997,67 @@ document.addEventListener("DOMContentLoaded", () => {
   color: #fff;
   cursor: pointer;
 }
-```
-
-
-
-4) Ollama Modelfile
-
+Ollama Modelfile
 Ollama’s documentation says to save it as Modelfile, use FROM for the base model, and use PARAMETER / SYSTEM to set behavior.
-
 FROM llama3.1:8b-instruct
-
 PARAMETER temperature 0.2
+
 PARAMETER num_ctx 8192
+
 PARAMETER top_p 0.9
-
 SYSTEM """
+
 Eres un asistente de ventas y soporte de una tienda de computadoras y accesorios.
-
 Reglas:
-- Responde únicamente en español.
-- Solo hablas de tecnología, hardware, accesorios, precios, descuentos, comparaciones, recomendaciones, enlaces de productos y temas universales simples como fecha.
-- Si el usuario pregunta algo fuera de tema, redirige con amabilidad a computadoras.
-- Si el usuario pregunta temas sensibles, rehúsa con educación y vuelve a computadoras.
-- Nunca inventes precios, stock, descuentos o links.
-- Usa herramientas solo cuando haga falta y solo las permitidas.
-- Si no tienes datos del catálogo, dilo claramente.
-- Tono: amable, vendedor, claro, breve, natural.
+
+Responde únicamente en español.
+Solo hablas de tecnología, hardware, accesorios, precios, descuentos, comparaciones, recomendaciones, enlaces de productos y temas universales simples como fecha.
+Si el usuario pregunta algo fuera de tema, redirige con amabilidad a computadoras.
+Si el usuario pregunta temas sensibles, rehúsa con educación y vuelve a computadoras.
+Nunca inventes precios, stock, descuentos o links.
+Usa herramientas solo cuando haga falta y solo las permitidas.
+Si no tienes datos del catálogo, dilo claramente.
+Tono: amable, vendedor, claro, breve, natural.
+
 """
-
 Then create the model:
-
 ollama create wp-hardware-assistant -f Modelfile
-ollama run wp-hardware-assistant
 
+ollama run wp-hardware-assistant
 Ollama’s API is available locally at http://localhost:11434/api, and tool calling happens through /api/chat.
 
-5) The Laravel-side contract
-
+The Laravel-side contract
 Your catalog API should return normalized JSON. A good contract is:
-
 GET /products
-GET /products/{id}
-GET /products/compare?ids=1,2,3
-GET /discounts
-optionally GET /recommendations
 
+GET /products/{id}
+
+GET /products/compare?ids=1,2,3
+
+GET /discounts
+
+optionally GET /recommendations
 Each response should include the canonical url, price, sale_price, discount_percent, brand, category, summary, and image.
 
-6) Why this is safer than “let the model do everything”
-
+Why this is safer than “let the model do everything”
 The model is never allowed to touch the system directly. It only gets:
-
 a limited set of tools,
-catalog data,
-and the right to answer in Spanish.
 
+catalog data,
+
+and the right to answer in Spanish.
 That is the part that keeps the assistant production-safe.
 
-7) About fine-tuning
-
+About fine-tuning
 No, I would not do fine-tuning first.
-
 For this use case, the right order is:
-
 strict Spanish system prompt,
+
 tool calling,
+
 catalog/API grounding,
+
 logged failure cases,
+
 only then fine-tuning if you still need style or domain consistency improvements.
-
-
-## HEADING 3
+HEADING 3"

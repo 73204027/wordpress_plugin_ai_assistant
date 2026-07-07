@@ -1,0 +1,6 @@
+# RESPONSE
+
+- no mcp required since we don't use several unstructured external services to get data. we'll use direct REST http requests for tool calling (rest api)
+- no fine tuning required: Retrieval-Augmented Generation (injection of memories via 'context' object) solves 95% of e-commerce use cases.
+- what about latency?? still, local 8B model takes 8-15s to answer
+- synchronous requests to call Ollama will freeze entire system
