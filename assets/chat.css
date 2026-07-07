@@ -1,0 +1,144 @@
+.ai-shell {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99999;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.ai-fab {
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.18);
+}
+
+.ai-panel {
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  height: 540px;
+  max-height: calc(100vh - 100px);
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.ai-panel.is-hidden {
+  display: none;
+}
+
+.ai-topbar {
+  padding: 14px 16px;
+  background: #111827;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ai-topbar span {
+  font-size: 12px;
+  opacity: .8;
+}
+
+.ai-messages {
+  flex: 1;
+  overflow: auto;
+  padding: 14px;
+  background: #f8fafc;
+}
+
+.ai-bubble {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  line-height: 1.45;
+  font-size: 14px;
+  max-width: 92%;
+}
+
+.ai-user {
+  margin-left: auto;
+  background: #dbeafe;
+}
+
+.ai-assistant {
+  margin-right: auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.ai-products {
+  border-top: 1px solid #e5e7eb;
+  padding: 12px;
+  background: #fff;
+  max-height: 180px;
+  overflow: auto;
+}
+
+.ai-products-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #6b7280;
+}
+
+.ai-product {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.ai-product-name {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.ai-product-meta,
+.ai-product-summary {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 6px;
+}
+
+.ai-product-link {
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.ai-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.ai-input {
+  flex: 1;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+}
+
+.ai-send {
+  border: 0;
+  border-radius: 12px;
+  padding: 0 16px;
+  background: #111827;
+  color: #fff;
+  cursor: pointer;
+}
