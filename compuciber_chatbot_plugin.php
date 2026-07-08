@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Compuciber AI Agent
+ * Plugin Name: Compuciber Chatbot Plugin
  * Description: Streaming Spanish AI sales/support assistant for WooCommerce, backed by external Ollama/OpenAI-compatible inference.
  * Version: 2.0.0
  * Author: marcelo_dev
@@ -68,7 +68,7 @@ final class CCAI_Plugin
         add_action('admin_menu', [$this, 'admin_menu']);
         add_action('admin_init', [$this, 'register_settings']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
-        add_shortcode('compuciber_ai_agent', [$this, 'shortcode']);
+        add_shortcode('compuciber_chatbot_plugin', [$this, 'shortcode']);
         add_shortcode('ai_assistant', [$this, 'shortcode']);
         add_action('rest_api_init', [$this, 'register_routes']);
 
@@ -329,6 +329,7 @@ final class CCAI_Plugin
             'brandName'     => (string) $o['brand_name'],
             'sessionHeader' => self::SESSION_HEADER,
             'placeholder'   => 'Escribe tu pregunta...',
+            'debug' => defined('WP_DEBUG') && WP_DEBUG,
             'i18n'          => [
                 'hello'       => 'Hola, soy ' . (string) $o['assistant_name'] . '. Puedo ayudarte con productos, precios, descuentos, compatibilidad y soporte técnico.',
                 'typing'      => 'Escribiendo...',
@@ -411,6 +412,7 @@ final class CCAI_Plugin
     public function handle_chat(WP_REST_Request $request)
     {
         $o = $this->settings();
+        $request_id = function_exists('wp_generate_uuid4') ? wp_generate_uuid4() : bin2hex(random_bytes(8));
 
         if ((string) $o['require_nonce'] === '1') {
             $nonce = (string) $request->get_header('x-wp-nonce');
@@ -483,10 +485,16 @@ final class CCAI_Plugin
         }
 
         if (!$this->is_inference_configured($o)) {
+            $this->ccai_log('Inference not configured', [
+                'request_id' => $request_id,
+                'endpoint'   => $this->endpoint_for_log((string) ($o['inference_endpoint'] ?? '')),
+                'model'      => (string) ($o['model'] ?? ''),
+            ]);
+
             return new WP_REST_Response([
                 'ok'    => false,
-                'error' => 'inference_not_configured',
-                'reply' => 'El asistente todavía no está configurado.',
+                'error' => 'assistant_unavailable',
+                'reply' => $this->public_external_error_message(),
             ], 503);
         }
 
@@ -500,29 +508,60 @@ final class CCAI_Plugin
 
         $this->send_stream_headers();
 
-        $this->sse('meta', [
-            'ok'        => true,
-            'session'   => $session_token,
-            'timestamp' => wp_date('c'),
-        ]);
+        try {
+            $this->sse('meta', [
+                'ok'        => true,
+                'session'   => $session_token,
+                'timestamp' => wp_date('c'),
+            ]);
 
-        $this->sse('products', [
-            'items' => $products,
-        ]);
+            $this->sse('products', [
+                'items' => $products,
+            ]);
 
-        $assistant_reply = $this->stream_inference($messages, $o);
+            $result = $this->stream_inference($messages, $o, $request_id);
+            $assistant_reply = trim((string) ($result['reply'] ?? ''));
 
-        if ($assistant_reply === '') {
-            $fallback = 'No pude generar una respuesta en este momento. Puedes intentar con una consulta más específica sobre producto, precio, stock, descuento o soporte técnico.';
-            $this->sse('token', ['text' => $fallback]);
-            $assistant_reply = $fallback;
+            if (empty($result['ok']) || $assistant_reply === '') {
+                $fallback = $this->public_external_error_message();
+
+                $this->sse('error', [
+                    'message' => $fallback,
+                ]);
+
+                $this->sse('done', [
+                    'ok' => false,
+                ]);
+
+                $this->flush_now();
+                exit;
+            }
+
+            $this->append_history(
+                $session_token,
+                $message,
+                $assistant_reply,
+                (int) $o['history_turns'],
+                (int) $o['history_ttl_seconds']
+            );
+
+            $this->sse('done', [
+                'ok' => true,
+            ]);
+        } catch (Throwable $e) {
+            $this->ccai_log('Unhandled chat stream error', [
+                'request_id' => $request_id,
+                'exception'  => $e,
+            ]);
+
+            $this->sse('error', [
+                'message' => $this->public_external_error_message(),
+            ]);
+
+            $this->sse('done', [
+                'ok' => false,
+            ]);
         }
-
-        $this->append_history($session_token, $message, $assistant_reply, (int) $o['history_turns'], (int) $o['history_ttl_seconds']);
-
-        $this->sse('done', [
-            'ok' => true,
-        ]);
 
         $this->flush_now();
         exit;
@@ -922,13 +961,70 @@ final class CCAI_Plugin
         return implode("\n", $lines);
     }
 
-    private function stream_inference(array $messages, array $o): string
+    private function public_external_error_message(): string
+    {
+        return 'Ahora mismo no puedo conectar con el asistente. Intenta nuevamente en unos segundos.';
+    }
+
+    private function ccai_log(string $message, array $context = []): void
+    {
+        $safe = [];
+
+        foreach ($context as $key => $value) {
+            $key_lc = strtolower((string) $key);
+
+            if (
+                str_contains($key_lc, 'secret') ||
+                str_contains($key_lc, 'token') ||
+                str_contains($key_lc, 'nonce') ||
+                str_contains($key_lc, 'password') ||
+                str_contains($key_lc, 'authorization')
+            ) {
+                $safe[$key] = '[redacted]';
+                continue;
+            }
+
+            if ($value instanceof Throwable) {
+                $safe[$key] = [
+                    'type'    => get_class($value),
+                    'message' => mb_substr($value->getMessage(), 0, 500, 'UTF-8'),
+                    'file'    => basename($value->getFile()),
+                    'line'    => $value->getLine(),
+                ];
+                continue;
+            }
+
+            if (is_scalar($value) || $value === null) {
+                $safe[$key] = mb_substr((string) $value, 0, 700, 'UTF-8');
+                continue;
+            }
+
+            $encoded = wp_json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $safe[$key] = is_string($encoded) ? mb_substr($encoded, 0, 700, 'UTF-8') : '[unserializable]';
+        }
+
+        $json = wp_json_encode($safe, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        error_log('[CCAI] ' . $message . (is_string($json) && $json !== '[]' ? ' ' . $json : ''));
+    }
+
+    private function endpoint_for_log(string $endpoint): string
+    {
+        $parts = wp_parse_url($endpoint);
+
+        if (!is_array($parts)) {
+            return '[invalid endpoint]';
+        }
+
+        return ((string) ($parts['scheme'] ?? '')) . '://' .
+            ((string) ($parts['host'] ?? '')) .
+            ((string) ($parts['path'] ?? ''));
+    }
+
+    private function stream_inference(array $messages, array $o, string $request_id): array
     {
         if (!function_exists('curl_init')) {
-            $this->sse('error', [
-                'message' => 'El servidor no tiene cURL habilitado.',
-            ]);
-            return '';
+            $this->ccai_log('cURL unavailable', ['request_id' => $request_id]);
+            return ['ok' => false, 'reply' => ''];
         }
 
         $endpoint = esc_url_raw((string) $o['inference_endpoint']);
@@ -945,26 +1041,28 @@ final class CCAI_Plugin
         $body = wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         if (!is_string($body) || $body === '') {
-            $this->sse('error', [
-                'message' => 'No se pudo preparar la solicitud al modelo.',
+            $this->ccai_log('Failed to encode inference payload', [
+                'request_id' => $request_id,
+                'json_error' => json_last_error_msg(),
             ]);
-            return '';
+
+            return ['ok' => false, 'reply' => ''];
         }
 
         $reply = '';
         $line_buffer = '';
+        $raw_sample = '';
         $max_reply_chars = 5000;
+        $parse_errors = 0;
 
         $ch = curl_init($endpoint);
 
         if ($ch === false) {
-            $this->sse('error', [
-                'message' => 'No se pudo iniciar conexión con inferencia.',
-            ]);
-            return '';
+            $this->ccai_log('Failed to initialize cURL', ['request_id' => $request_id]);
+            return ['ok' => false, 'reply' => ''];
         }
 
-        curl_setopt_array($ch, [
+        $set = curl_setopt_array($ch, [
             CURLOPT_POST            => true,
             CURLOPT_HTTPHEADER      => [
                 'Content-Type: application/json',
@@ -978,20 +1076,26 @@ final class CCAI_Plugin
             CURLOPT_TIMEOUT         => (int) $o['total_timeout'],
             CURLOPT_SSL_VERIFYPEER  => true,
             CURLOPT_SSL_VERIFYHOST  => 2,
-            CURLOPT_WRITEFUNCTION   => function ($curl, string $chunk) use (&$reply, &$line_buffer, $max_reply_chars): int {
+            CURLOPT_WRITEFUNCTION   => function ($curl, string $chunk) use (
+                &$reply,
+                &$line_buffer,
+                &$raw_sample,
+                &$parse_errors,
+                $max_reply_chars,
+                $request_id
+            ): int {
+                if (strlen($raw_sample) < 1200) {
+                    $raw_sample .= substr($chunk, 0, 1200 - strlen($raw_sample));
+                }
+
                 $line_buffer .= $chunk;
 
                 while (($pos = strpos($line_buffer, "\n")) !== false) {
                     $line = substr($line_buffer, 0, $pos);
                     $line_buffer = substr($line_buffer, $pos + 1);
-
                     $line = trim($line);
 
-                    if ($line === '' || str_starts_with($line, ':')) {
-                        continue;
-                    }
-
-                    if (!str_starts_with($line, 'data:')) {
+                    if ($line === '' || str_starts_with($line, ':') || !str_starts_with($line, 'data:')) {
                         continue;
                     }
 
@@ -1004,6 +1108,15 @@ final class CCAI_Plugin
                     $json = json_decode($data, true);
 
                     if (!is_array($json)) {
+                        if ($parse_errors < 3) {
+                            $this->ccai_log('Invalid SSE JSON chunk', [
+                                'request_id' => $request_id,
+                                'json_error' => json_last_error_msg(),
+                                'sample'     => mb_substr($data, 0, 300, 'UTF-8'),
+                            ]);
+                        }
+
+                        $parse_errors++;
                         continue;
                     }
 
@@ -1032,43 +1145,69 @@ final class CCAI_Plugin
                     }
 
                     $reply .= $token;
-
-                    $this->sse('token', [
-                        'text' => $token,
-                    ]);
+                    $this->sse('token', ['text' => $token]);
                 }
 
                 return strlen($chunk);
             },
         ]);
 
-        $ok = curl_exec($ch);
+        if (!$set) {
+            curl_close($ch);
 
-        if ($ok === false) {
-            error_log('[CCAI] cURL inference error: ' . curl_error($ch));
+            $this->ccai_log('Failed to configure cURL options', [
+                'request_id' => $request_id,
+            ]);
 
-            if ($reply === '') {
-                $this->sse('error', [
-                    'message' => 'El asistente tardó demasiado o no respondió.',
-                ]);
-            }
+            return ['ok' => false, 'reply' => ''];
         }
 
+        $ok = curl_exec($ch);
         $http_code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $content_type = (string) curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+
+        if ($ok === false) {
+            $this->ccai_log('Inference cURL execution failed', [
+                'request_id' => $request_id,
+                'endpoint'   => $this->endpoint_for_log($endpoint),
+                'curl_errno' => curl_errno($ch),
+                'curl_error' => curl_error($ch),
+                'http_code'  => $http_code,
+            ]);
+
+            curl_close($ch);
+            return ['ok' => false, 'reply' => ''];
+        }
 
         if ($http_code >= 400) {
-            error_log('[CCAI] Inference HTTP error: ' . $http_code);
+            $this->ccai_log('Inference HTTP error', [
+                'request_id'      => $request_id,
+                'endpoint'        => $this->endpoint_for_log($endpoint),
+                'http_code'       => $http_code,
+                'content_type'    => $content_type,
+                'response_sample' => wp_strip_all_tags(mb_substr($raw_sample, 0, 700, 'UTF-8')),
+            ]);
 
-            if ($reply === '') {
-                $this->sse('error', [
-                    'message' => 'El servicio de IA no está disponible temporalmente.',
-                ]);
-            }
+            curl_close($ch);
+            return ['ok' => false, 'reply' => ''];
         }
 
         curl_close($ch);
 
-        return trim($reply);
+        $reply = trim($reply);
+
+        if ($reply === '') {
+            $this->ccai_log('Inference returned empty response', [
+                'request_id'   => $request_id,
+                'endpoint'     => $this->endpoint_for_log($endpoint),
+                'http_code'    => $http_code,
+                'content_type' => $content_type,
+            ]);
+
+            return ['ok' => false, 'reply' => ''];
+        }
+
+        return ['ok' => true, 'reply' => $reply];
     }
 
     private function classify_policy(string $message): array

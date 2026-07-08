@@ -9,9 +9,26 @@
 
   const safeText = (value) => String(value ?? "");
 
+  const debug = (...args) => {
+    if (SETTINGS?.debug && typeof console !== "undefined") {
+      console.warn("[CCAI]", ...args);
+    }
+  };
+
+  const getCrypto = () =>
+    typeof globalThis !== "undefined" && globalThis.crypto ? globalThis.crypto : null;
+
   const uuidV4Fallback = () => {
+    const cryptoObj = getCrypto();
     const bytes = new Uint8Array(16);
-    crypto.getRandomValues(bytes);
+
+    if (cryptoObj && typeof cryptoObj.getRandomValues === "function") {
+      cryptoObj.getRandomValues(bytes);
+    } else {
+      for (let i = 0; i < bytes.length; i += 1) {
+        bytes[i] = Math.floor(Math.random() * 256);
+      }
+    }
 
     bytes[6] = (bytes[6] & 0x0f) | 0x40;
     bytes[8] = (bytes[8] & 0x3f) | 0x80;
@@ -40,17 +57,21 @@
         return existing.toLowerCase();
       }
 
+      const cryptoObj = getCrypto();
+
       const token =
-        crypto && typeof crypto.randomUUID === "function"
-          ? crypto.randomUUID()
+        cryptoObj && typeof cryptoObj.randomUUID === "function"
+          ? cryptoObj.randomUUID()
           : uuidV4Fallback();
 
       localStorage.setItem(STORAGE_KEY, token);
 
       return token.toLowerCase();
     } catch (_) {
-      return crypto && typeof crypto.randomUUID === "function"
-        ? crypto.randomUUID().toLowerCase()
+      const cryptoObj = getCrypto();
+
+      return cryptoObj && typeof cryptoObj.randomUUID === "function"
+        ? cryptoObj.randomUUID().toLowerCase()
         : uuidV4Fallback();
     }
   };
@@ -76,7 +97,17 @@
     }
 
     bind() {
-      if (!this.root || !this.fab || !this.panel || !this.form || !this.input) {
+      if (
+        !this.root ||
+        !this.fab ||
+        !this.panel ||
+        !this.form ||
+        !this.input ||
+        !this.sendButton ||
+        !this.messagesEl ||
+        !this.productsEl
+      ) {
+        debug("Chat DOM incomplete; widget not mounted.");
         return;
       }
 
@@ -120,9 +151,16 @@
 
     setBusy(value) {
       this.isBusy = Boolean(value);
-      this.input.disabled = this.isBusy;
-      this.sendButton.disabled = this.isBusy;
-      this.root.classList.toggle("is-busy", this.isBusy);
+
+      if (this.input) {
+        this.input.disabled = this.isBusy;
+      }
+
+      if (this.sendButton) {
+        this.sendButton.disabled = this.isBusy;
+      }
+
+      this.root?.classList.toggle("is-busy", this.isBusy);
     }
 
     scrollBottom() {
@@ -308,10 +346,9 @@
           } else if (parsed.event === "products") {
             this.renderProducts(parsed.data?.items || []);
           } else if (parsed.event === "error") {
-            const text = parsed.data?.message || SETTINGS.i18n?.error || "Error de conexión.";
-            if (!assistantBody.textContent.trim()) {
-              this.appendToMessage(assistantBody, text);
-            }
+            debug("SSE error event", parsed.data);
+            assistantBody.textContent = SETTINGS.i18n?.error || "Ahora mismo no puedo conectar con el asistente. Intenta nuevamente en unos segundos.";
+            return;
           } else if (parsed.event === "done") {
             return;
           }
@@ -384,10 +421,14 @@
             "No pude generar una respuesta en este momento. Intenta con una consulta más específica.";
         }
       } catch (error) {
-        assistantBody.textContent =
-          error?.name === "AbortError"
-            ? "El asistente tardó demasiado. Intenta con una pregunta más corta."
-            : SETTINGS.i18n?.error || "Error de conexión.";
+        debug("Chat request failed", error);
+
+        if (!assistantBody.textContent.trim()) {
+          assistantBody.textContent =
+            error?.name === "AbortError"
+              ? "El asistente tardó demasiado. Intenta nuevamente en unos segundos."
+              : SETTINGS.i18n?.error || "Ahora mismo no puedo conectar con el asistente. Intenta nuevamente en unos segundos.";
+        }
       } finally {
         window.clearTimeout(timeout);
         this.abortController = null;
