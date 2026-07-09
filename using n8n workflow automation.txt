@@ -1,0 +1,86 @@
+
+@programacion-es
+hace 1 mes
+Con un VPS básico, generalmente modelos pequeños para que la respuesta no tarde demasiado, dependerá para qué quieres el modelo, si para hacer consultas tipo chat o ya para autocompletado o tareas más complejas, orquestación de agentes, etc. (para esto último si necesitarías más potencia)
+
+Podrías probar variaciones de Qwen, Llama, Gemma4 o deepseek y quedarte con la variante que mejor te resulte para lo que quieres hacer =)
+
+
+
+
+WHY N8N IS NOT SUITABLE... AND WHERE IT IS SUITABLE
+No — **not for your current core architecture**.
+
+Since your plugin already has tools/methods that interact with WooCommerce, it is usually **better practice to keep that logic in your WordPress plugin**, not move it to n8n.
+
+Use n8n only for **side automations**, not core chatbot intelligence.
+
+Best architecture:
+
+```text
+WordPress plugin
+ +- Chat UI
+ +- WooCommerce tools/methods
+ +- WPC Composite logic
+ +- Cart/product/order logic
+ +- Prompt/context builder
+ +- LLM provider call ? Ollama gateway
+```
+
+n8n would be useful for things like:
+
+```text
+Chat detects high-value lead ? notify salesperson
+Customer asks for human help ? create support ticket
+Order created ? send custom follow-up
+Product out of stock ? alert customer later
+Abandoned cart ? send reminder
+Daily sales/chat summary ? email admin
+```
+
+But for this:
+
+```text
+User asks chatbot:
+“Recommend a compatible PC build”
+```
+
+Your plugin should handle it, because it has direct access to:
+
+```text
+WooCommerce products
+WPC Composite metadata
+cart/session state
+product rules
+prices
+stock
+WordPress permissions
+```
+
+Moving that to n8n would add:
+
+```text
+more latency
+more moving parts
+more failure points
+duplicated business logic
+harder debugging
+weaker WordPress/WooCommerce integration
+```
+
+So the clean answer is:
+
+**Core chatbot logic:** WordPress plugin.
+**LLM serving/gateway:** VPS + tunnel + Ollama.
+**Business automations around chatbot events:** optional n8n.
+
+Architecturally:
+
+```text
+WordPress plugin = source of truth for commerce logic
+n8n = automation assistant, not the brain
+Ollama = language model provider
+VPS = public secure gateway
+```
+
+So no, managing your existing WooCommerce tools with n8n is **not automatically better architecture**. In your case, it is probably worse unless you specifically need workflow automation outside the real-time chat response.
